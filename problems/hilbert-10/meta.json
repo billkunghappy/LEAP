@@ -1,0 +1,27 @@
+{
+  "subtitle": "over rings of integers of number fields",
+  "collection": "Classic problems",
+  "number": null,
+  "variant": null,
+  "marks": "",
+  "featured": true,
+  "area": "Number theory · Logic",
+  "loc": 750000,
+  "credit": "Teamwork-LEAP",
+  "added": "2026-10",
+  "summary": "Is there an algorithm that decides whether a Diophantine equation has a solution? Over rings of integers of number fields the question stayed open for more than 50 years.",
+  "problem": [
+    "Hilbert's 1900 question asks for an algorithm that decides whether any Diophantine equation is solvable. Matiyasevich answered no over ℤ in 1970.",
+    "The same question over general rings of integers of number fields stayed open for more than 50 years until its recent resolution, which Teamwork-LEAP formalized."
+  ],
+  "statement": null,
+  "notes": [],
+  "links": [],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "hilbert-10",
+  "title": "Hilbert's tenth problem",
+  "files": {}
+}

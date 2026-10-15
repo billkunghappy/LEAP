@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Problem · LEAP</title>
+<meta name="description" content="LEAP is an open, trackable agent that proves theorems in Lean 4 alongside mathematicians.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">LEAP</a>
+    <nav aria-label="Site">
+      <a href="problems.html">Solved problems</a>
+      <a href="index.html#how">How it works</a>
+      <a class="opt" href="index.html#run">Run it</a>
+      <a class="opt" href="index.html#cite">Cite</a>
+      <button class="theme-btn" id="themeBtn" type="button">Theme · light</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="page-head"><div class="wrap">
+  <div class="crumbrow"><nav class="crumb" id="crumb" aria-label="Breadcrumb"><a href="problems.html">Solved problems</a></nav><div class="pager" id="pager"></div></div>
+  <div id="loadErr" hidden></div>
+  <div class="dhead">
+    <div>
+      <h1 class="ph" id="dTitle">Loading…</h1>
+      <p class="dsub" id="dSub"></p>
+      <div class="dbadges" id="dBadges"></div>
+    </div>
+    <div class="dstat"><div class="loc" id="dLoc"></div><div class="lbl" id="dLocL"></div></div>
+  </div>
+  <div class="dbody">
+    <div class="prob" id="dProb"></div>
+    <aside class="dside" id="dSide"></aside>
+  </div>
+</div></section>
+<section class="page-body" id="sol"><div class="wrap">
+  <div class="stabs" role="tablist" aria-label="Solution">
+    <button class="stab" role="tab" type="button" data-s="dag" aria-selected="true">Proof DAG<span class="n" id="nDag"></span></button>
+    <button class="stab" role="tab" type="button" data-s="informal" aria-selected="false">Informal proof</button>
+    <button class="stab" role="tab" type="button" data-s="lean" aria-selected="false">Lean proof</button>
+  </div>
+
+  <div id="sInformal" hidden></div>
+  <div id="sLean" hidden></div>
+  <div id="sDag">
+    <div class="xbox">
+      <div class="xbar">
+        <div class="vtabs" role="tablist" aria-label="DAG view">
+          <button class="vtab" type="button" role="tab" data-v="dag" aria-selected="true">DAG</button>
+          <button class="vtab" type="button" role="tab" data-v="outline" aria-selected="false">Outline</button>
+        </div>
+        <input class="inp" id="nsearch" type="search" placeholder="Find lemma by name" aria-label="Find lemma by name">
+        <span id="nfound" class="mono" style="font-size:11.5px;color:var(--muted)"></span>
+        <span class="sp"></span>
+        <label><input type="checkbox" id="abChk"> Rejected attempts</label>
+      </div>
+      <div class="xstats" id="xstats"></div>
+      <div class="cview" id="cview" hidden><header class="cv-head" id="cvHead"></header><div class="cv-body" id="cvBody"></div></div>
+      <div class="xmain">
+        <div>
+          <div class="stage" id="stage">
+            <canvas id="cv" aria-label="Proof DAG"></canvas>
+            <div class="dtools" id="dtools"><button type="button" id="bFold">Fold to depth 2</button><button type="button" id="bUnfold">Unfold all</button></div>
+            <div class="zoomctl" id="zoomctl"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Fit to view">⤢</button></div>
+            <canvas id="mini" aria-label="Minimap"></canvas>
+            <div class="hint" id="hint">Drag to pan · Ctrl/⌘ + scroll or pinch to zoom · double-click to fold</div>
+            <div class="pane" id="outlinePane" hidden role="tree" aria-label="Proof outline"></div>
+          </div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <aside class="side" id="side" aria-live="polite"></aside>
+      </div>
+    </div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">LEAP · Lean Environment Agentic Prover. Proof DAGs and Lean code marked “sample” are placeholders until the real exports are added.</div></footer>
+<div class="pop" id="pop" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/problem.js"></script>
+</body>
+</html>

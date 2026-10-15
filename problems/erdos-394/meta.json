@@ -1,0 +1,36 @@
+{
+  "subtitle": null,
+  "collection": "Erdős problems",
+  "number": 394,
+  "variant": "hall_conjecture",
+  "marks": "*†",
+  "featured": false,
+  "area": "Number theory",
+  "loc": null,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "Erdős and Hall conjecture that the sum is o(x² / (log x)ᶜ) for any c < log 2.",
+  "problem": [
+    "Erdős and Hall conjecture that the sum is o(x² / (log x)ᶜ) for any c < log 2."
+  ],
+  "statement": null,
+  "notes": [
+    {
+      "title": "TODO",
+      "text": "Add the definition of the sum being estimated."
+    }
+  ],
+  "links": [
+    {
+      "label": "erdosproblems.com/394",
+      "url": "https://www.erdosproblems.com/394"
+    }
+  ],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "erdos-394",
+  "title": "Erdős Problem #394",
+  "files": {}
+}

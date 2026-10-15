@@ -1,0 +1,36 @@
+{
+  "subtitle": null,
+  "collection": "Erdős problems",
+  "number": 1101,
+  "variant": "(ii)",
+  "marks": "*†",
+  "featured": false,
+  "area": null,
+  "loc": null,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "There is a good sequence with sub-exponential growth.",
+  "problem": [
+    "There is a good sequence with sub-exponential growth."
+  ],
+  "statement": null,
+  "notes": [
+    {
+      "title": "TODO",
+      "text": "Add the definition of a good sequence."
+    }
+  ],
+  "links": [
+    {
+      "label": "erdosproblems.com/1101",
+      "url": "https://www.erdosproblems.com/1101"
+    }
+  ],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "erdos-1101",
+  "title": "Erdős Problem #1101",
+  "files": {}
+}

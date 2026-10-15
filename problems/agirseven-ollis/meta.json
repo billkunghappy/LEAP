@@ -1,0 +1,27 @@
+{
+  "subtitle": "linear realizations of {1ᵃ, (y−k)ᵇ, yᶜ}",
+  "collection": "Classic problems",
+  "number": null,
+  "variant": null,
+  "marks": "",
+  "featured": true,
+  "area": "Combinatorics · Graph labelings",
+  "loc": 30000,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "Every multiset {1ᵃ, (y−k)ᵇ, yᶜ} with 1 ≤ k < y/2 and a ≥ y has a linear realization: a Hamiltonian path in Kᵥ with exactly those edge lengths.",
+  "problem": [
+    "For all integers y, k, a, b, c with 1 ≤ k < y/2, a ≥ y and b, c ≥ 0, the multiset {1ᵃ, (y−k)ᵇ, yᶜ} has a linear realization.",
+    "That means the vertices {0, 1, …, v−1} of the complete graph Kᵥ, where v = a + b + c + 1, can be arranged into a Hamiltonian path whose edge lengths |pᵢ₊₁ − pᵢ| are exactly a copies of 1, b copies of y − k and c copies of y."
+  ],
+  "statement": "1 ≤ k < y/2,  a ≥ y,  b, c ≥ 0   ⟹   {1ᵃ, (y−k)ᵇ, yᶜ} has a linear realization",
+  "notes": [],
+  "links": [],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "agirseven-ollis",
+  "title": "Agırseven–Ollis conjecture",
+  "files": {}
+}

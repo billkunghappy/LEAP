@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEAP · An open, trackable prover for mathematicians</title>
+<meta name="description" content="LEAP is an open, trackable agent that proves theorems in Lean 4 alongside mathematicians.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">LEAP</a>
+    <nav aria-label="Site">
+      <a href="problems.html">Solved problems</a>
+      <a href="index.html#how">How it works</a>
+      <a class="opt" href="index.html#run">Run it</a>
+      <a class="opt" href="index.html#cite">Cite</a>
+      <button class="theme-btn" id="themeBtn" type="button">Theme · light</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap hero">
+  <div class="kicker">Lean Environment Agentic Prover</div>
+  <h1>An open, trackable prover that works alongside mathematicians</h1>
+  <p class="lede">LEAP turns a mathematical argument into a Lean proof that the kernel checks. Every lemma it proposes, every failed attempt and every repair is kept in a proof DAG you can inspect, resume and steer.</p>
+  <p class="headline" id="headline" aria-live="polite"></p>
+  <ul class="values">
+    <li><span class="vk">Open</span>The agent and CLI are open source, and every proof here can be downloaded and re-checked.</li>
+    <li><span class="vk">Trackable</span>Each run records its whole search: lemmas, dead ends and the Lean code for every step.</li>
+    <li><span class="vk">Built to assist</span>Start from your own informal proof or blueprint and let LEAP do the formal work.</li>
+  </ul>
+  <div class="btns">
+    <a class="btn primary" href="#problems">See the solved problems</a>
+    <a class="btn" href="https://arxiv.org/abs/2606.03303" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9 1.5V5h4"/></svg>Paper</a>
+    <a class="btn" href="https://github.com/billkunghappy/LEAP-CLI" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>LEAP</a>
+    <a class="btn" href="https://github.com/billkunghappy/LEAP-CLI" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="m4.5 6 2 2-2 2M8.5 10.5h3"/></svg>LEAP-CLI</a>
+  </div>
+  <!-- TODO: real mathematician contributors, and the real person-to-affiliation mapping (superscripts are placeholders) -->
+  <div class="people">
+    <div class="prow2"><span class="plabel">Mathematicians</span><p><span class="pn">Mathematician One<sup>3</sup></span>, <span class="pn">Mathematician Two<sup>3</sup></span>, <span class="pn">Mathematician Three<sup>3</sup></span>, <span class="pn">Mathematician Four<sup>3</sup></span> <span class="todo">TODO</span></p></div>
+    <div class="prow2"><span class="plabel">LEAP team</span><p><span class="pn">Po-Nien Kung<sup>1</sup></span>, <span class="pn">Linfeng Song<sup>1</sup></span>, <span class="pn">Dawsen Hwang<sup>1</sup></span>, <span class="pn">Jinsung Yoon<sup>1</sup></span>, <span class="pn">Chun-Liang Li<sup>1</sup></span>, <span class="pn">Simone Severini<sup>1</sup></span>, <span class="pn">Mirek Olšák<sup>1</sup></span>, <span class="pn">Edward Lockhart<sup>1</sup></span>, <span class="pn">Quoc V Le<sup>1</sup></span>, <span class="pn">Burak Gokturk<sup>1</sup></span>, <span class="pn">Thang Luong<sup>1</sup></span>, <span class="pn">Tomas Pfister<sup>1</sup></span>, <span class="pn">Nanyun Peng<sup>1</sup></span></p></div>
+    <ol class="affils"><li><sup>1</sup><img src="assets/logos/google.svg" alt="">Google Cloud AI Research</li><li><sup>2</sup><img src="assets/logos/deepmind.svg" alt="" onerror="this.remove()">Google DeepMind</li><li><sup>3</sup><img src="assets/logos/google.svg" alt="">Google</li><li class="todo-li"><span class="todo">TODO</span>Person-to-affiliation mapping is a placeholder</li></ol>
+  </div></div>
+
+<section class="sec" id="problems"><div class="wrap">
+  <div class="sec-head">
+    <div><div class="kicker">01 · Solved problems</div>
+    <h2>Featured results</h2></div>
+    <a class="btn" href="problems.html">All solved problems →</a>
+  </div>
+  <div id="loadErr" hidden></div>
+  <div class="car" id="car">
+    <button type="button" class="car-btn prev" id="carPrev" aria-label="Previous featured problem">‹</button>
+    <div class="car-track" id="feat" tabindex="0" aria-label="Featured problems"></div>
+    <button type="button" class="car-btn next" id="carNext" aria-label="Next featured problem">›</button>
+  </div>
+  <div class="car-dots" id="carDots"></div>
+</div></section>
+
+<section class="sec" id="how"><div class="wrap">
+  <div class="kicker">02 · How it works</div>
+  <h2>One orchestrator, parallel subagents, and a proof DAG behind a compiler gate</h2>
+  <p class="intro">LEAP-CLI keeps the proof DAG. An orchestrator claims the next open work from it and launches subagents in parallel. Each subagent submits its result back to the CLI, and only what the Lean compiler accepts enters the graph.</p>
+  <div class="fig">
+    <div class="fig-scroll">
+      <svg id="pipe" viewBox="0 0 1080 380" role="img" aria-label="An orchestrator claims work from LEAP-CLI and launches informal provers, formal provers and reviewers in parallel. They submit to LEAP-CLI, where a Lean compiler gate decides what enters the proof DAG.">
+        <defs>
+          <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8z" class="ah"/></marker>
+          <marker id="arrOn" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8z" class="ah2"/></marker>
+        </defs>
+
+        <!-- column labels -->
+        <text class="pt" x="40" y="40">ORCHESTRATOR</text>
+        <text class="pt" x="330" y="40">SUBAGENTS · IN PARALLEL</text>
+
+        <!-- orchestrator -->
+        <g class="st agent" data-st="orch"><rect x="40" y="148" width="190" height="96" rx="14"/>
+          <text class="t" x="58" y="180">Orchestrator</text>
+          <text class="s" x="58" y="203">claims the next work</text>
+          <text class="s" x="58" y="222">launches subagents</text></g>
+
+        <!-- subagents -->
+        <g class="st sub" data-st="inf"><rect class="sh2" x="338" y="70" width="210" height="72" rx="10"/><rect class="sh1" x="334" y="66" width="210" height="72" rx="10"/><rect x="330" y="62" width="210" height="72" rx="10"/><text class="t" x="346" y="90">Informal prover</text><text class="s" x="346" y="110">proof sketch and new lemmas</text><text class="par" data-par="inf" x="528" y="82" text-anchor="end"></text></g>
+        <g class="st sub" data-st="frm"><rect class="sh2" x="338" y="168" width="210" height="72" rx="10"/><rect class="sh1" x="334" y="164" width="210" height="72" rx="10"/><rect x="330" y="160" width="210" height="72" rx="10"/><text class="t" x="346" y="188">Formal prover</text><text class="s" x="346" y="208">a full Lean proof</text><text class="par" data-par="frm" x="528" y="180" text-anchor="end"></text></g>
+        <g class="st sub" data-st="rev"><rect class="sh2" x="338" y="266" width="210" height="72" rx="10"/><rect class="sh1" x="334" y="262" width="210" height="72" rx="10"/><rect x="330" y="258" width="210" height="72" rx="10"/><text class="t" x="346" y="286">Reviewer</text><text class="s" x="346" y="306">re-checks what is in the graph</text><text class="par" data-par="rev" x="528" y="278" text-anchor="end"></text></g>
+
+        <!-- LEAP-CLI -->
+        <g class="st cli" data-st="cli"><rect x="620" y="22" width="440" height="336" rx="16"/></g>
+        <text class="clit" x="640" y="50">LEAP-CLI</text>
+        <text class="pt" x="740" y="50">PROOF DAG</text>
+        <g class="st gate" data-st="gate"><rect x="636" y="66" width="60" height="276" rx="10"/>
+          <path class="glock" d="M656,96 v-6 a10,10 0 0 1 20,0 v6"/><rect class="gbody" x="651" y="96" width="30" height="22" rx="4"/>
+          <text class="gt" x="666" y="140" text-anchor="middle">Lean</text>
+          <text class="gt" x="666" y="154" text-anchor="middle">compiler</text>
+          <text class="gt2" x="666" y="170" text-anchor="middle">gate</text>
+          <g class="gok"><circle cx="666" cy="214" r="12"/><path d="M660,214 l4,4 l8,-9"/></g></g>
+        <g class="dn off" data-d="GX"><circle cx="666" cy="250" r="12" class="gx"/><text x="666" y="254.5" text-anchor="middle" class="gxt">✕</text></g>
+        <g class="dn off" data-d="T"><rect x="842" y="78" width="96" height="28" rx="6"/><text x="890" y="96" text-anchor="middle">main_thm</text></g>
+        <g class="dn off" data-d="A"><path class="de" d="M890,106 L780,168"/><rect x="735" y="168" width="90" height="28" rx="6"/><text x="780" y="186" text-anchor="middle">bound</text></g>
+        <g class="dn off" data-d="B"><path class="de" d="M890,106 V168"/><rect x="845" y="168" width="90" height="28" rx="6"/><text x="890" y="186" text-anchor="middle">estimate</text></g>
+        <g class="dn off" data-d="C"><path class="de" d="M890,106 L1000,168"/><rect x="955" y="168" width="90" height="28" rx="6"/><text x="1000" y="186" text-anchor="middle">base_case</text></g>
+        <g class="dn off" data-d="B1"><path class="de" d="M890,196 L835,258"/><rect x="790" y="258" width="90" height="28" rx="6"/><text x="835" y="276" text-anchor="middle">est_low</text></g>
+        <g class="dn off" data-d="B2"><path class="de" d="M890,196 L945,258"/><rect x="900" y="258" width="90" height="28" rx="6"/><text x="945" y="276" text-anchor="middle">est_high</text></g>
+
+        <!-- edges -->
+        <path class="ed" id="e-claim" d="M135,148 C135,8 560,8 640,40"/>
+        <text class="el" x="390" y="18" text-anchor="middle">claim next</text>
+        <path class="ed" id="e-l1" d="M232,180 C280,180 282,98 328,98"/>
+        <path class="ed" id="e-l2" d="M232,196 H328"/>
+        <path class="ed" id="e-l3" d="M232,212 C280,212 282,294 328,294"/>
+        <text class="el" x="280" y="188" text-anchor="middle">launch</text>
+        <path class="ed" id="e-s1" d="M550,98 C590,98 600,120 634,120"/>
+        <path class="ed" id="e-s2" d="M550,196 H634"/>
+        <path class="ed" id="e-s3" d="M550,294 C590,294 600,272 634,272"/>
+        <text class="el" x="594" y="188" text-anchor="middle">submit</text>
+      </svg>
+    </div>
+    <div class="fig-bar">
+      <div id="pCap" aria-live="polite"></div>
+      <div id="pDots"></div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar"><div class="k">Trackable</div><h4>A DAG with backtracking</h4><p>Every goal, attempt and dead end stays in the proof DAG, so a failed branch can be retried and any run can be inspected or resumed.</p></div>
+    <div class="pillar"><div class="k">Fast</div><h4>Subagents run in parallel</h4><p>The orchestrator claims every lemma that is ready and launches a subagent for each, so a wide proof is worked on everywhere at once.</p></div>
+    <div class="pillar"><div class="k">Local</div><h4>Compiled per lemma</h4><p>Each submission is compiled on its own against a local Lean server, so even very large graphs never wait on a full rebuild.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <div class="kicker">03 · Run it</div>
+  <h2>Point LEAP-CLI at a Lean statement and let it work</h2>
+  <p class="intro">You need Python, a model endpoint and a Lean server. Give it a theorem whose proof is <code>sorry</code>, optionally with your own informal proof, and it builds the proof DAG until everything compiles.</p>
+  <div class="run2">
+    <ol class="rsteps">
+      <li><div class="rn">1</div><div class="rb"><h4>Install</h4><p>LEAP-CLI is a Python package. Installing it adds the <code>leap-*</code> commands.</p>
+        <div class="cmd"><pre>pip install git+https://github.com/billkunghappy/LEAP-CLI.git</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
+      <li><div class="rn">2</div><div class="rb"><h4>Start a Lean server</h4><p>Every submission is compiled here before it can enter the graph. Docker builds the server straight from the repository.</p>
+        <div class="cmd"><pre>docker build -t leap-lean https://github.com/billkunghappy/LEAP-CLI.git#main:src/leap/interfaces
+docker run -p 8000:8000 leap-lean</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
+      <li><div class="rn">3</div><div class="rb"><h4>Prove a theorem</h4><p>Check that the model and the Lean server respond, then start a run on your statement.</p>
+        <div class="cmd"><pre>leap-check
+leap-run-agent --file Problem.lean</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
+    </ol>
+    <div class="tree">
+      <div class="tree-h"><span class="dotr"></span><span class="doty"></span><span class="dotg"></span><span>what a run leaves behind</span></div>
+      <ul>
+        <li class="d">runs/my_problem/</li>
+        <li><span class="f">problem.lean</span><span class="c">the statement you gave it</span></li>
+        <li><span class="f">reference/</span><span class="c">your informal proof or blueprint, if any</span></li>
+        <li><span class="f hl">proof_graph.json</span><span class="c">the proof DAG, and the point a run resumes from</span></li>
+        <li><span class="f">nodes/&lt;lemma&gt;/</span><span class="c">context, findings and logs for each lemma</span></li>
+        <li><span class="f">orchestrator_log.md</span><span class="c">what was claimed and launched, step by step</span></li>
+        <li><span class="f ok">solution/answer.lean</span><span class="c">the verified proof, written once nothing is left as <code>sorry</code></span></li>
+      </ul>
+      <p class="tree-f">The problem pages on this site are built from three of these files: <code>problem.lean</code>, <code>proof_graph.json</code> and <code>solution/answer.lean</code>.</p>
+    </div>
+  </div>
+  <div class="tracks">
+    <a class="track" href="https://arxiv.org/abs/2606.03303" target="_blank" rel="noopener"><div class="tn">Paper</div><h4>LEAP: Supercharging LLMs for Formal Mathematics</h4><p>The agentic framework and its ablations. arXiv 2606.03303.</p></a>
+    <a class="track" href="https://github.com/billkunghappy/LEAP-CLI" target="_blank" rel="noopener"><div class="tn">Code</div><h4>LEAP</h4><p>The agent framework from the paper.</p></a>
+    <a class="track" href="https://github.com/billkunghappy/LEAP-CLI" target="_blank" rel="noopener"><div class="tn">Tool</div><h4>LEAP-CLI</h4><p>Run LEAP on your own Lean statements from the command line.</p></a>
+  </div>
+</div></section>
+
+<section class="sec" id="cite"><div class="wrap">
+  <div class="kicker">Cite</div>
+  <h2>BibTeX</h2>
+  <div class="bib">
+<pre id="bibtex">@article{kung2026leap,
+  title   = {LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks},
+  author  = {Kung, Po-Nien and Song, Linfeng and Hwang, Dawsen and Yoon, Jinsung and
+             Li, Chun-Liang and Severini, Simone and Ol{\v{s}}{\'a}k, Mirek and
+             Lockhart, Edward and Le, Quoc V and Gokturk, Burak and Luong, Thang and
+             Pfister, Tomas and Peng, Nanyun},
+  journal = {arXiv preprint arXiv:2606.03303},
+  year    = {2026}
+}</pre>
+    <button class="btn" id="copyBib" type="button">Copy</button>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">LEAP · Lean Environment Agentic Prover. Proof DAGs and Lean code marked “sample” are placeholders until the real exports are added.</div></footer>
+<div class="pop" id="pop" hidden></div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

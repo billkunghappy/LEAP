@@ -1,0 +1,37 @@
+{
+  "subtitle": null,
+  "collection": "Erdős problems",
+  "number": 289,
+  "variant": null,
+  "marks": "",
+  "featured": true,
+  "area": "Number theory · Egyptian fractions",
+  "loc": 9544,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "Can 1 be written as a sum of reciprocals over k disjoint, non-adjacent intervals of length at least 2, for every large k?",
+  "problem": [
+    "Is it true that, for all sufficiently large k, there exist finite intervals I₁, …, Iₖ ⊂ ℕ, distinct, not overlapping or adjacent, with |Iᵢ| ≥ 2 for 1 ≤ i ≤ k, such that"
+  ],
+  "statement": "1 = ∑ᵢ₌₁ᵏ ∑_{n ∈ Iᵢ} 1/n ?",
+  "notes": [],
+  "links": [
+    {
+      "label": "erdosproblems.com/289",
+      "url": "https://www.erdosproblems.com/289"
+    }
+  ],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": "erdos_289"
+  },
+  "id": "erdos-289",
+  "title": "Erdős Problem #289",
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 29
+}

@@ -1,0 +1,42 @@
+{
+  "subtitle": null,
+  "collection": "Erdős problems",
+  "number": 1063,
+  "variant": null,
+  "marks": "",
+  "featured": true,
+  "area": "Number theory",
+  "loc": 5508,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "Estimate nₖ with a better upper bound than Cambie's nₖ ≤ k · lcm(1, …, k − 1).",
+  "problem": [
+    "Estimate nₖ by finding a better upper bound than Cambie's nₖ ≤ k · lcm(1, …, k − 1)."
+  ],
+  "statement": null,
+  "notes": [
+    {
+      "title": "Formalization note",
+      "text": "The comparator takes its least common multiple in ℕ and casts the result. Writing the ascription as `((…).lcm (fun n : ℕ => n) : ℝ)` instead puts it on the `Finset.lcm` application, so the coercion lands on n and the lcm is taken in ℝ. There the lcm of non-zero elements is 1, and the whole comparator collapses to k."
+    }
+  ],
+  "links": [
+    {
+      "label": "erdosproblems.com/1063",
+      "url": "https://www.erdosproblems.com/1063"
+    }
+  ],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": "erdos_1063_all"
+  },
+  "id": "erdos-1063",
+  "title": "Erdős Problem #1063",
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 26
+}

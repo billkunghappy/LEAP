@@ -1,0 +1,36 @@
+{
+  "subtitle": null,
+  "collection": "Erdős problems",
+  "number": 1095,
+  "variant": "upper_conjecture",
+  "marks": "*",
+  "featured": false,
+  "area": null,
+  "loc": null,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "g(n) ≤ exp((1 + o(1)) k).",
+  "problem": [
+    "The upper conjecture:"
+  ],
+  "statement": "g(n) ≤ exp((1 + o(1)) k)",
+  "notes": [
+    {
+      "title": "TODO",
+      "text": "The relation symbol was lost in the source text and is restored as ≤ from the variant name. Add the definitions of g and k."
+    }
+  ],
+  "links": [
+    {
+      "label": "erdosproblems.com/1095",
+      "url": "https://www.erdosproblems.com/1095"
+    }
+  ],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "erdos-1095",
+  "title": "Erdős Problem #1095",
+  "files": {}
+}
