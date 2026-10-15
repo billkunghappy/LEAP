@@ -555,3 +555,4 @@ details.defs pre{margin-top:6px}
 .proof-bar .sp{flex:1}
 .code-view{max-height:72vh;overflow:auto;font:12.5px/1.6 var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 0;color:var(--ink)}
 .code-view{position:relative}
+.tracks{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
