@@ -1,0 +1,29 @@
+{
+  "subtitle": "finite-time blowup of 3D Navier-Stokes equation with smooth force",
+  "collection": "Classic problems",
+  "number": null,
+  "variant": null,
+  "marks": "",
+  "featured": true,
+  "area": "PDE · Analysis",
+  "loc": 275000,
+  "credit": null,
+  "added": "2026-10",
+  "summary": "3D Navier-Stokes equation has a finite-time blowup with smooth force",
+  "problem": [
+    "The existence of finite-time blowup for the 3D incompressible Navier--Stokes equations with smooth forcing lies at the heart of one of the seven",        
+   "Millennium Prize Problems posed by the Clay Mathematics Institute. Standing unresolved for over 90 years since Leray's foundational work, this",         
+   "milestone problem was only recently settled. Using LEAP, we independently formalize this breakthrough end-to-end, with network access to OpenAI’s public",
+   "formalization repository strictly blocked, demonstrating LEAP's autonomous capability to reproduce frontier-level mathematical formalizations from scratch."
+  ],
+  "statement": null,
+  "notes": [],
+  "links": [],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "navier-stokes",
+  "title": "Finite Time Blowup for Navier--Stokes",
+  "files": {}
+}
