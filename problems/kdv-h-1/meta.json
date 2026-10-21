@@ -6,13 +6,14 @@
   "marks": "",
   "featured": true,
   "area": "PDE · Analysis",
-  "loc": 80000,
+  "loc": 31000,
   "credit": null,
   "added": "2026-10",
   "summary": "The KdV equation, a classic model of water waves, still makes reliable predictions when the starting wave is extremely rough.",
   "problem": [
-    "The Korteweg–de Vries (KdV) equation is a classic model of water waves. This is a proof that it still makes reliable predictions even when the starting wave is extremely rough.",
-    "It settles a problem that had stood for decades and reaches the roughest level of initial data the equation can possibly handle: the Sobolev space H⁻¹."
+    "Extending the KdV flow from Schwartz space to the critical low-regularity space H^{-1} was a longstanding open problem. This Annals of Mathematics",
+    "paper resolved it by introducing the method of commuting flows—a breakthrough that generalized to many other integrable systems and led to an invited lecture at ICM 2026.",
+    "We use LEAP to formalize the paper's main result end-to-end."
   ],
   "statement": null,
   "notes": [],
