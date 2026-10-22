@@ -6,13 +6,14 @@
   "marks": "",
   "featured": true,
   "area": "Number theory · Logic",
-  "loc": 750000,
+  "loc": 918600,
   "credit": "Teamwork-LEAP",
   "added": "2026-10",
   "summary": "Is there an algorithm that decides whether a Diophantine equation has a solution? Over rings of integers of number fields the question stayed open for more than 50 years.",
   "problem": [
-    "Hilbert's 1900 question asks for an algorithm that decides whether any Diophantine equation is solvable. Matiyasevich answered no over ℤ in 1970.",
-    "The same question over general rings of integers of number fields stayed open for more than 50 years until its recent resolution, which Teamwork-LEAP formalized."
+    "In 1900, Hilbert asked for an algorithm that decides whether a given Diophantine equation has an integer solution. In 1970, Matiyasevich, completing work of Davis, Putnam and Robinson, showed that no such algorithm exists over integers.",
+    "The same question over the ring of integers of an arbitrary number field stayed open for about half a century, until Koymans and Pagano settled it in 2024 (https://arxiv.org/abs/2412.01768). The key ingredient is a rank-stability theorem for elliptic curves.",
+    "Using Teamwork-LEAP, we formalize this rank-stability theorem in the paper. The formalization rests on a single assumption, which is the the 2-parity theorem of T. and V. Dokchitser (Theorem 2.4 of https://arxiv.org/abs/0906.1815), stated for curves with full rational 2-torsion."
   ],
   "statement": null,
   "notes": [],
