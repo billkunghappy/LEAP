@@ -6,7 +6,7 @@
   "marks": "*†",
   "featured": false,
   "area": "Number theory · Totient",
-  "loc": 49000,
+  "loc": 49297,
   "credit": null,
   "added": "2026-10",
   "summary": "Let V(x) count the n ≤ x for which φ(m) = n is solvable. Does V(2x)/V(x) → 2?",
@@ -23,9 +23,15 @@
   ],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "erdos_416.parts.i"
   },
   "id": "erdos-416",
   "title": "Erdős Problem #416",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 225
 }

@@ -6,7 +6,7 @@
   "marks": "*†",
   "featured": false,
   "area": "Additive combinatorics",
-  "loc": null,
+  "loc": 810,
   "credit": null,
   "added": "2026-10",
   "summary": "Find the largest subset of n integers in which equal sums always have equally many terms. Is its size Θ((n log n)^{1/3})?",
@@ -14,7 +14,12 @@
     "Let h(n) be maximal such that if A ⊆ ℤ with |A| = n then there is B ⊆ A with |B| ≥ h(n) such that if a₁ + ⋯ + aᵣ = b₁ + ⋯ + bₛ with aᵢ, bᵢ ∈ B then r = s."
   ],
   "statement": "h(n) = Θ((n log n)^{1/3}) ?",
-  "notes": [],
+  "notes": [
+    {
+      "title": "Disproof",
+      "text": "LEAP refuted this statement. `answer.lean` assumes the statement as an `axiom` and derives `False` from it (axioms used: `propext`, `Classical.choice`, `Quot.sound` and the target)."
+    }
+  ],
   "links": [
     {
       "label": "erdosproblems.com/789",
@@ -23,9 +28,15 @@
   ],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "erdos_789.variants.cube_root_linearithmic"
   },
   "id": "erdos-789",
   "title": "Erdős Problem #789",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 1
 }

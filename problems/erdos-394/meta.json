@@ -6,7 +6,7 @@
   "marks": "*†",
   "featured": false,
   "area": "Number theory",
-  "loc": null,
+  "loc": 1652,
   "credit": null,
   "added": "2026-10",
   "summary": "Erdős and Hall conjecture that the sum is o(x² / (log x)ᶜ) for any c < log 2.",
@@ -18,6 +18,10 @@
     {
       "title": "TODO",
       "text": "Add the definition of the sum being estimated."
+    },
+    {
+      "title": "Disproof",
+      "text": "LEAP refuted this statement. `answer.lean` assumes the statement as an `axiom` and derives `False` from it (axioms used: `propext`, `Classical.choice`, `Quot.sound` and the target)."
     }
   ],
   "links": [
@@ -28,9 +32,15 @@
   ],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "erdos_394.variants.hall_conjecture"
   },
   "id": "erdos-394",
   "title": "Erdős Problem #394",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 1
 }
