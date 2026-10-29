@@ -6,16 +6,14 @@
   "marks": "",
   "featured": true,
   "area": "PDE · Analysis",
-  "loc": 31000,
+  "loc": 79600,
   "credit": null,
   "added": "2026-10",
   "summary": "The KdV equation, a classic model of water waves, still makes reliable predictions when the starting wave is extremely rough.",
   "problem": [
-    "Extending the KdV flow from Schwartz space to the critical low-regularity space H^{-1} was a longstanding open problem. This Annals of Mathematics",
-    "paper resolved it by introducing the method of commuting flows—a breakthrough that generalized to many other integrable systems and led to an invited lecture at ICM 2026.",
-    "We use LEAP to formalize the paper's main result end-to-end."
+    "Extending the KdV flow from Schwartz space to the critical low-regularity space H⁻¹ was a longstanding open problem. This Annals of Mathematics paper resolved it by introducing the method of commuting flows—a breakthrough that generalized to many other integrable systems and led to an invited lecture at ICM 2026. We use LEAP to formalize the paper's main extension result end-to-end."
   ],
-  "statement": null,
+  "statement": "The equation (KdV) is globally well-posed for initial data in H⁻¹(ℝ) or H⁻¹(ℝ/ℤ) in the following sense: in each geometry, the solution map extends uniquely from Schwartz space to a jointly continuous map Φ : ℝ × H⁻¹ → H⁻¹. Moreover, for each initial data q ∈ H⁻¹, the orbit {Φ(t, q) : t ∈ ℝ} is uniformly bounded and equicontinuous in H⁻¹.",
   "notes": [],
   "links": [],
   "lean": {
@@ -24,5 +22,19 @@
   },
   "id": "kdv-h-1",
   "title": "KdV is well-posed in H⁻¹",
-  "files": {}
+  "files": {
+    "statement": [
+      { "label": "Line",  "path": "problem_line.lean" },
+      { "label": "Torus", "path": "problem_torus.lean" }
+    ],
+    "dag": [
+      { "label": "Line",  "path": "proof_graph_line.json" },
+      { "label": "Torus", "path": "proof_graph_torus.json" }
+    ],
+    "proof": [
+      { "label": "Line",  "path": "answer/KdVLine.lean" },
+      { "label": "Torus", "path": "answer/KdVTorus.lean" }
+    ],
+    "informal": "informal.md"
+  }
 }

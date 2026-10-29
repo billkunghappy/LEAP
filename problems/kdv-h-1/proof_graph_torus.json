@@ -4617,7 +4617,6 @@
       "label": "line 18966. Requires line `h_exists`/`h_unique`."
     }
   ],
-  "assumed_results_file": "/usr/local/google/home/zhengtan/leap_agent_playground/data/KdV_data/KdV_well_posed_torus_assumed_results.md",
   "global_informal_proof": null,
   "graph_metadata": {}
 }

@@ -11,12 +11,9 @@
   "added": "2026-10",
   "summary": "3D Navier-Stokes equation has a finite-time blowup with smooth force",
   "problem": [
-    "The existence of finite-time blowup for the 3D incompressible Navier--Stokes equations with smooth forcing lies at the heart of one of the seven",        
-   "Millennium Prize Problems posed by the Clay Mathematics Institute. Standing unresolved for over 90 years since Leray's foundational work, this",         
-   "milestone problem was only recently settled. Using LEAP, we independently formalize this breakthrough end-to-end, with network access to OpenAI’s public",
-   "formalization repository strictly blocked, demonstrating LEAP's autonomous capability to reproduce frontier-level mathematical formalizations from scratch."
+    "The existence of finite-time blowup for the 3D incompressible Navier--Stokes equations with smooth forcing lies at the heart of one of the seven Millennium Prize Problems posed by the Clay Mathematics Institute. Standing unresolved for over 90 years since Leray's foundational work, this milestone problem was only recently settled. Using LEAP, we independently formalize this breakthrough end-to-end, with network access to OpenAI’s public formalization repository strictly blocked, demonstrating LEAP's autonomous capability to reproduce frontier-level mathematical formalizations from scratch."
   ],
-  "statement": null,
+  "statement": "For every viscosity ν > 0 there exist a smooth, divergence-free initial velocity u₀ and a smooth force f such that the system ∂ₜu +(u·∇)u = νΔu − ∇p + f,   ∇·u = 0,   u(x, 0) = u₀(x) has no smooth solution (u, p) on ℝ³ × [0, ∞) with bounded energy, where u₀ and f decay faster than any polynomial. The same holds on the torus ℝ³/ℤ³, with u₀, f, u and p periodic.",
   "notes": [],
   "links": [],
   "lean": {
@@ -25,5 +22,10 @@
   },
   "id": "navier-stokes",
   "title": "Finite Time Blowup for Navier--Stokes",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  }
 }

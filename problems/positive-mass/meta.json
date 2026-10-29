@@ -5,19 +5,15 @@
   "variant": null,
   "marks": "",
   "featured": true,
-  "area": "Geometric Analysis, Differential Geometry",
+  "area": "Geometric Analysis · Differential Geometry",
   "loc": 288000,
   "credit": null,
   "added": "2026-10",
   "summary": "The Positive Mass Theorem in general relativity",
   "problem": [
-  "As a cornerstone of mathematical general relativity, the Positive Mass Theorem asserts that for any complete, smooth, connected 3-dimensional",             
-  "asymptotically flat Riemannian manifold with non-negative scalar curvature, the total gravitational (ADM) mass is non-negative, and vanishes if and only",
-  "if the manifold is isometric to flat Euclidean space \\mathbb{R}^3. Landmark proofs of this theorem via minimal surfaces (by Schoen and Yau) and spinors (by",      
-  "Witten) were central to the Fields Medals awarded to both Shing-Tung Yau (1982) and Edward Witten (1990). Using LEAP, we formalize this celebrated",     
-  "theorem end-to-end by following the modern harmonic-function level-set approach of Bray, Kazaras, Khuri, and Stern (https://arxiv.org/abs/1911.06754)."
+    "As a cornerstone of mathematical general relativity, the Positive Mass Theorem asserts that for any complete, smooth, connected 3-dimensional asymptotically flat Riemannian manifold with non-negative scalar curvature, the total gravitational (ADM) mass is non-negative, and vanishes if and only if the manifold is isometric to flat Euclidean space ℝ³. Landmark proofs of this theorem via minimal surfaces (by Schoen and Yau) and spinors (by Witten) were central to the Fields Medals awarded to both Shing-Tung Yau (1982) and Edward Witten (1990). Using LEAP, we formalize this celebrated theorem end-to-end by following the modern harmonic-function level-set approach of Bray, Kazaras, Khuri, and Stern (https://arxiv.org/abs/1911.06754)."
   ],
-  "statement": null,
+  "statement": "Let `(M, g)` be a smooth connected complete asymptotically flat Riemannian 3-manifold with nonnegative scalar curvature. Then for every end the ADM mass `m` exists and satisfies `m ≥ 0`, and `m = 0` if and only if `(M, g)` is isometric to `(ℝ³, δ)`.",
   "notes": [],
   "links": [],
   "lean": {
@@ -26,5 +22,10 @@
   },
   "id": "positive-mass",
   "title": "Harmonic Functions and the Mass of 3-Dimensional Asymptotically Flat Riemannian Manifolds",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  }
 }

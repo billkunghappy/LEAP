@@ -11,13 +11,9 @@
   "added": "2026-10",
   "summary": "Every tree with max mean subtree order is a caterpillar",
   "problem": [
-  "For any n-vertex tree, its mean subtree order is defined as the average number of vertices across all of its non-empty subtrees; more precisely, it is the sum of the",
-  "orders of all subtrees divided by the total number of subtrees. Posed in 1983, Jamison's Caterpillar Conjecture asserts that among all trees on n",      
-  "vertices, the maximum mean subtree order is achieved by a caterpillar tree, a tree that reduces to a simple path once all of its leaves are removed.",    
-  "After standing open in extremal graph theory for over 40 years, the conjecture was recently resolved in a strengthened form, establishing that every n-",
-  "vertex tree maximizing the mean subtree order must be a caterpillar. We formalize this result end-to-end using LEAP."
+    "For any n-vertex tree, its mean subtree order is defined as the average number of vertices across all of its non-empty subtrees; more precisely, it is the sum of the orders of all subtrees divided by the total number of subtrees. Posed in 1983, Jamison's Caterpillar Conjecture asserts that among all trees on n vertices, the maximum mean subtree order is achieved by a caterpillar tree, a tree that reduces to a simple path once all of its leaves are removed. After standing open in extremal graph theory for over 40 years, the conjecture was recently resolved in a strengthened form, establishing that every n-vertex tree maximizing the mean subtree order must be a caterpillar. We formalize this result end-to-end using LEAP."
   ],
-  "statement": null,
+  "statement": "For every `n ≥ 1`, every tree `T` on `n` vertices whose mean subtree order is maximal among all trees on `n` vertices is a caterpillar.",
   "notes": [],
   "links": [],
   "lean": {
@@ -26,5 +22,10 @@
   },
   "id": "jamison-caterpillar",
   "title": "Mean Subtree Order Maximizers at a Fixed Order are Caterpillar Graphs",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  }
 }
