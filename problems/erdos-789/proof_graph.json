@@ -1,0 +1,38 @@
+{
+  "nodes": {
+    "erdos_789.variants.cube_root_linearithmic": {
+      "id": "erdos_789.variants.cube_root_linearithmic",
+      "informal_problem": {
+        "statement": "theorem erdos_789.variants.cube_root_linearithmic : (fun n \u21a6 (subsetSumThreshold n : \u211d)) =\u0398[atTop] fun n \u21a6 (n * Real.log n) ^ ((1 : \u211d) / 3)"
+      },
+      "informal_proof": null,
+      "formal_theorem": null,
+      "formal_sketch": null,
+      "definitions": "",
+      "and_nodes": [],
+      "reverse_dependency_ids": [],
+      "search_metadata": {
+        "live_heuristic_cost": 5.0,
+        "live_success_probability": 0.7,
+        "processing": false,
+        "dispatch_count": 9,
+        "informal_dispatches": 5,
+        "phase": "informal",
+        "last_action": null,
+        "revision": 4,
+        "last_error": null,
+        "decomposition_failed": false,
+        "disproved": true
+      }
+    }
+  },
+  "environment": {
+    "imports": [],
+    "open_namespaces": [],
+    "shared_definitions": "import Mathlib\nset_option maxHeartbeats 4000000\n\nopen Filter\nopen scoped Asymptotics Finset\nnamespace Erdos789\n/-- Given a non-negative integer $n$, we say $m$ is a separating cardinality of\nsubset sums if, for any set $A$ of $n$ integers, there is some $B\\subseteq A$ of\nsize $\\geq m$ such that subset sums of $B$ can only ever coincide when the\nsubsets have the same cardinality. -/\ndef IsSubsetSumSeparatingCard (n m : \u2115) : Prop :=\n  \u2200 A : Finset \u2124, #A = n \u2192 \u2203 B : Finset \u2124, B \u2286 A \u2227 m \u2264 #B \u2227\n    (\u2200\u1d49 (T \u2286 B) (S \u2286 B), S.Nonempty \u2192 T.Nonempty \u2192 \u2211 a \u2208 T, a = \u2211 b \u2208 S, b \u2192 #T = #S)\n/-- The subset sum threshold $h(n)$, for each positive $n$, is the maximal separating\ncardinality of subset sums for $n$. -/\nnoncomputable def subsetSumThreshold (n : \u2115): \u2115 :=\n  sSup { m | IsSubsetSumSeparatingCard n m }\nopen MeasureTheory\nopen Polynomial\nopen scoped BigOperators\nopen scoped Classical\nopen scoped ENNReal\nopen scoped EuclideanGeometry\nopen scoped InnerProductSpace\nopen scoped intervalIntegral\nopen scoped List\nopen scoped Matrix\nopen scoped Nat\nopen scoped NNReal\nopen scoped Pointwise\nopen scoped ProbabilityTheory\nopen scoped Real\nopen scoped symmDiff\nopen scoped Topology",
+    "dynamic_headers": []
+  },
+  "allowed_axioms": [],
+  "global_informal_proof": null,
+  "graph_metadata": {}
+}

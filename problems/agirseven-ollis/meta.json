@@ -6,7 +6,7 @@
   "marks": "",
   "featured": true,
   "area": "Combinatorics · Graph labelings",
-  "loc": 30000,
+  "loc": 30192,
   "credit": null,
   "added": "2026-10",
   "summary": "Every multiset {1ᵃ, (y−k)ᵇ, yᶜ} with 1 ≤ k < y/2 and a ≥ y has a linear realization: a Hamiltonian path in Kᵥ with exactly those edge lengths.",
@@ -19,9 +19,15 @@
   "links": [],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "agirseven_ollis_linear_realization_conjecture"
   },
   "id": "agirseven-ollis",
   "title": "Agırseven–Ollis conjecture",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 193
 }

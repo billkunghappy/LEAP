@@ -6,7 +6,7 @@
   "marks": "*†",
   "featured": false,
   "area": null,
-  "loc": null,
+  "loc": 2805,
   "credit": null,
   "added": "2026-10",
   "summary": "There is a good sequence with sub-exponential growth.",
@@ -28,9 +28,15 @@
   ],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "erdos_1101.parts.ii"
   },
   "id": "erdos-1101",
   "title": "Erdős Problem #1101",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 19
 }

@@ -1,0 +1,40 @@
+{
+  "nodes": {
+    "erdos_394.variants.hall_conjecture": {
+      "id": "erdos_394.variants.hall_conjecture",
+      "informal_problem": {
+        "statement": "theorem erdos_394.variants.hall_conjecture : \u2200 c < Real.log 2, (fun x \u21a6 \u2211 n \u2208 Icc 1 \u230ax\u230b\u208a, (t 2 n : \u211d)) =o[atTop] (fun x \u21a6 x ^ 2 / (Real.log x) ^ c)"
+      },
+      "informal_proof": null,
+      "formal_theorem": null,
+      "formal_sketch": null,
+      "definitions": "",
+      "and_nodes": [],
+      "reverse_dependency_ids": [],
+      "search_metadata": {
+        "live_heuristic_cost": 5.0,
+        "live_success_probability": 0.7,
+        "processing": false,
+        "dispatch_count": 10,
+        "informal_dispatches": 5,
+        "phase": "informal",
+        "last_action": null,
+        "revision": 6,
+        "last_error": null,
+        "decomposition_failed": false,
+        "disproved": true,
+        "infra_failures": 0,
+        "proof_attempts": 1
+      }
+    }
+  },
+  "environment": {
+    "imports": [],
+    "open_namespaces": [],
+    "shared_definitions": "import Mathlib\nset_option maxHeartbeats 4000000\n\nopen Nat Filter Finset\nopen scoped Asymptotics Topology Nat\nnamespace Erdos394\n/--\nLet $t_k(n)$ denote the least $m$ such that $n\\mid m(m+1)(m+2)\\cdots (m+k-1).$\n-/\nnoncomputable def t (k n : \u2115) : \u2115 :=\n  sInf { m : \u2115 | 0 < m \u2227 n \u2223 \u220f i \u2208 range k, (m + i) }\n/-- `t k n = v` when `v` works and nothing positive below it does. -/\n\ntheorem t_eq_of {n k v : \u2115} (hv : 0 < v)\n    (hdvd : n \u2223 \u220f i \u2208 range k, (v + i))\n    (hlt : \u2200 m \u2208 range v, 0 < m \u2192 \u00ac (n \u2223 \u220f i \u2208 range k, (m + i))) :\n    t k n = v := by\n  refine le_antisymm (Nat.sInf_le \u27e8hv, hdvd\u27e9) ?_\n  by_contra hc\n  push_neg at hc\n  have hne : { m : \u2115 | 0 < m \u2227 n \u2223 \u220f i \u2208 range k, (m + i) }.Nonempty := \u27e8v, hv, hdvd\u27e9\n  obtain \u27e8hpos, hd\u27e9 := Nat.sInf_mem hne\n  exact hlt _ (mem_range.mpr hc) hpos hd\n/-- The least positive multiple of `n` is `n`, so `t 1 n = n`. -/\n\ntheorem t_one {n : \u2115} (hn : 0 < n) : t 1 n = n := by\n  refine le_antisymm (Nat.sInf_le \u27e8hn, by simp\u27e9) ?_\n  have hne : { m : \u2115 | 0 < m \u2227 n \u2223 \u220f i \u2208 range 1, (m + i) }.Nonempty := \u27e8n, hn, by simp\u27e9\n  obtain \u27e8hpos, hd\u27e9 := Nat.sInf_mem hne\n  rw [prod_range_one, add_zero] at hd\n  exact Nat.le_of_dvd hpos hd\nopen MeasureTheory\nopen Polynomial\nopen scoped BigOperators\nopen scoped Classical\nopen scoped ENNReal\nopen scoped EuclideanGeometry\nopen scoped InnerProductSpace\nopen scoped intervalIntegral\nopen scoped List\nopen scoped Matrix\nopen scoped Nat\nopen scoped NNReal\nopen scoped Pointwise\nopen scoped ProbabilityTheory\nopen scoped Real\nopen scoped symmDiff\nopen scoped Topology",
+    "dynamic_headers": []
+  },
+  "allowed_axioms": [],
+  "global_informal_proof": null,
+  "graph_metadata": {}
+}
