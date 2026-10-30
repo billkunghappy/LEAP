@@ -11,11 +11,11 @@
   "added": "2026-10",
   "summary": "Is there an algorithm that decides whether a Diophantine equation has a solution? Over rings of integers of number fields the question stayed open for more than 50 years.",
   "problem": [
-    "In 1900, Hilbert asked for an algorithm that decides whether a given Diophantine equation has an integer solution. In 1970, Matiyasevich, completing work of Davis, Putnam and Robinson, showed that no such algorithm exists over integers.",
-    "The same question over the ring of integers of an arbitrary number field stayed open for about half a century, until Koymans and Pagano settled it in 2024 (https://arxiv.org/abs/2412.01768). The key ingredient is a rank-stability theorem for elliptic curves.",
-    "Using Teamwork-LEAP, we formalize this rank-stability theorem in the paper. The formalization rests on a single assumption, which is the the 2-parity theorem of T. and V. Dokchitser (Theorem 2.4 of https://arxiv.org/abs/0906.1815), stated for curves with full rational 2-torsion."
+    [
+      "In 1900, Hilbert asked for an algorithm that decides whether a given Diophantine equation has an integer solution. In 1970, Matiyasevich, completing work of Davis, Putnam and Robinson, showed that no such algorithm exists over integers. The same question over the ring of integers of an arbitrary number field stayed open for about half a century, until Koymans and Pagano settled it in 2024 (https://arxiv.org/abs/2412.01768). The key ingredient is a rank-stability theorem for elliptic curves. Using Teamwork-LEAP, we formalize this rank-stability theorem in the paper. The formalization rests on a single assumption, which is the 2-parity theorem of T. and V. Dokchitser (Theorem 2.4 of https://arxiv.org/abs/0906.1815), stated for curves with full rational 2-torsion."
+    ]
   ],
-  "statement": null,
+  "statement": "Let K be a number field with at least 32 real places, and let L be a model of K(i). Then there exists an elliptic curve E/K whose rank is positive and does not grow after base change from K to K(i).",
   "notes": [],
   "links": [],
   "lean": {
@@ -24,5 +24,9 @@
   },
   "id": "hilbert-10",
   "title": "Hilbert's tenth problem",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "proof": "answer/hilbert_10_main.lean",
+    "informal": "informal.md"
+  }
 }
