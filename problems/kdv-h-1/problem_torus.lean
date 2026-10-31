@@ -1,4 +1,6 @@
 import Mathlib
+import KdVLine
+set_option maxHeartbeats 4000000
 
 /-!
 # KdV is well-posed in `H⁻¹(ℝ/ℤ)` (Killip–Vişan, Theorem 1.1, circle case)
@@ -22,15 +24,13 @@ folder. This file is the circle analogue of `KdV_well_posed.lean`, the line case
 
 ## Layout of this file
 
-* **Part I: line-case vocabulary.** These are the definitions of `KdV_well_posed.lean`, plus
-  the auxiliary definitions of `KdV_well_posed_final_proof.lean` (`GreenODE`, …, `RegN`).
-  They are copied *verbatim* and keep the same names in the same namespace `KdV`, under the
-  same `open`s. They play **no role in the torus statement** except `kdvRHS`, which is
-  geometry-independent. They are here only so that the results of
-  `KdV_well_posed_final_proof.lean`, which this experiment's assumption manifest permits,
-  can be declared as `axiom`s *character for character* and elaborate exactly as in their
-  source. If the axioms are later discharged by importing the proved file, Part I is
-  deleted.
+* **Part I: line-case results, imported.** `import KdVLine` brings in the complete, verified
+  proof of the line case (`KdV_well_posed_final_proof.lean`, built as the module `KdVLine`):
+  every definition of `KdV_well_posed.lean`, the auxiliary definitions (`GreenODE`, …, `RegN`)
+  and all 115 theorems, including `KdV.kdv_well_posed_H_minus_one`, in namespace `KdV`. They
+  are *proved* there, not assumed, so they may be used freely and add no axioms beyond
+  `propext`, `Classical.choice`, `Quot.sound`. Only `kdvRHS` appears in the torus statement.
+  (This replaces the earlier verbatim copy of the line-case definitions.)
 
 * **Part II: the circle `ℝ/ℤ`.** These are the torus definitions and the main theorem. All
   torus names end in `T` (or are `fourierCircle`), so they cannot be confused with the line
@@ -89,143 +89,9 @@ noncomputable section
 
 namespace KdV
 
-/-! # Part I. Line-case vocabulary
+/-! # Part I. Line-case results
 
-Verbatim copy of the definitions of `KdV_well_posed_final_proof.lean` (lines 79–134 and
-144–215 there). Do not edit: the assumed results of the manifest are stated in terms of
-exactly these definitions. -/
-
-/-! ## The KdV equation `d/dt q = -q''' + 6 q q'` -/
-
-/-- Right-hand side of (KdV) for a profile `f : ℝ → ℝ` at the point `x`:
-`-f'''(x) + 6 f(x) f'(x)`. -/
-def kdvRHS (f : ℝ → ℝ) (x : ℝ) : ℝ :=
-  -(iteratedDeriv 3 f x) + 6 * f x * deriv f x
-
-/-- A global Schwartz solution of (KdV) on the line: a curve `u : ℝ → 𝓢(ℝ, ℝ)` that is
-differentiable in the Schwartz-space (Fréchet) topology at every time `t`. Its derivative is
-the Schwartz function `x ↦ -∂ₓ³u(t,x) + 6 u(t,x) ∂ₓu(t,x)`. -/
-def IsSchwartzSolution (u : ℝ → 𝓢(ℝ, ℝ)) : Prop :=
-  ∀ t : ℝ, ∃ v : 𝓢(ℝ, ℝ), HasDerivAt u v t ∧ ∀ x : ℝ, v x = kdvRHS (u t) x
-
-/-! ## The space `H⁻¹(ℝ)` -/
-
-/-- The Fourier transform on the line with the paper's normalisation
-`q̂(ξ) = (2π)^{-1/2} ∫ e^{-iξx} q(x) dx`. -/
-def fourierLine (q : ℝ → ℝ) (ξ : ℝ) : ℂ :=
-  ((Real.sqrt (2 * π))⁻¹ : ℂ) * ∫ x : ℝ, Complex.exp (-((ξ : ℂ) * (x : ℂ)) * I) * (q x : ℂ)
-
-/-- The `H⁻¹(ℝ)` profile `ξ ↦ (4 + ξ²)^{-1/2} q̂(ξ)`. Its `L²(dξ)` norm is `‖q‖_{H⁻¹(ℝ)}`. -/
-def hm1Profile (q : ℝ → ℝ) (ξ : ℝ) : ℂ :=
-  ((Real.sqrt (4 + ξ ^ 2))⁻¹ : ℂ) * fourierLine q ξ
-
-/-- The isometric embedding of a Schwartz function into `L²(ℝ, dξ; ℂ)` via its `H⁻¹` profile
-(junk value `0` if the profile were not square integrable, which never happens). -/
-def toHm1 (q : 𝓢(ℝ, ℝ)) : Lp ℂ 2 (volume : Measure ℝ) :=
-  if h : MemLp (hm1Profile q) 2 volume then h.toLp _ else 0
-
-/-- Real `H⁻¹(ℝ)`, realised (isometrically) as the closure in `L²(ℝ, dξ; ℂ)` of the `H⁻¹`
-profiles of real Schwartz functions, i.e. the completion of `𝓢(ℝ, ℝ)` in the `H⁻¹` norm. -/
-def Hm1 : Submodule ℝ (Lp ℂ 2 (volume : Measure ℝ)) :=
-  (Submodule.span ℝ (Set.range toHm1)).topologicalClosure
-
-/-- The embedding `𝓢(ℝ, ℝ) → H⁻¹(ℝ)`. -/
-def ι (q : 𝓢(ℝ, ℝ)) : Hm1 :=
-  ⟨toHm1 q, Submodule.le_topologicalClosure _ (Submodule.subset_span ⟨q, rfl⟩)⟩
-
-/-! ## Equicontinuity and the extension property -/
-
-/-- `‖q(· + h) - q‖²_{H⁻¹(ℝ)}` expressed through the `H⁻¹` profile `f` of `q`:
-`∫ |e^{iξh} - 1|² |f(ξ)|² dξ`. -/
-def translateDiffSq (f : Lp ℂ 2 (volume : Measure ℝ)) (h : ℝ) : ℝ :=
-  ∫ ξ : ℝ, ‖(Complex.exp ((ξ : ℂ) * (h : ℂ) * I) - 1) * (f : ℝ → ℂ) ξ‖ ^ 2
-
-/-- Equicontinuity in `H⁻¹(ℝ)` (paper Definition 4.1): `q(· + h) → q` in `H⁻¹` as `h → 0`,
-uniformly for `q ∈ Q`. -/
-def EquicontinuousHm1 (Q : Set Hm1) : Prop :=
-  ∀ ε > 0, ∃ δ > 0, ∀ q ∈ Q, ∀ h : ℝ, |h| < δ →
-    translateDiffSq (q : Lp ℂ 2 (volume : Measure ℝ)) h < ε
-
-/-- `Φ` extends the Schwartz solution map: for every Schwartz solution `u`,
-`Φ(t, u(0)) = u(t)` in `H⁻¹(ℝ)` for all `t`. -/
-def ExtendsSchwartzFlow (Φ : ℝ × Hm1 → Hm1) : Prop :=
-  ∀ u : ℝ → 𝓢(ℝ, ℝ), IsSchwartzSolution u → ∀ t : ℝ, Φ (t, ι (u 0)) = ι (u t)
-
-/-! ## Auxiliary line-case definitions of `KdV_well_posed_final_proof.lean` -/
-
-def GreenODE (κ : ℝ) (q γ : 𝓢(ℝ, ℝ)) : Prop :=
-  ∀ x : ℝ, iteratedDeriv 3 (fun y => 1 / (2 * κ) + γ y) x =
-    2 * deriv (fun y => q y * (1 / (2 * κ) + γ y)) x
-      + 2 * q x * deriv (fun y => 1 / (2 * κ) + γ y) x
-      + 4 * κ ^ 2 * deriv (fun y => 1 / (2 * κ) + γ y) x
-
-
-
-def greenOffset (κ : ℝ) (q : 𝓢(ℝ, ℝ)) : 𝓢(ℝ, ℝ) :=
-  if h : ∃ γ : 𝓢(ℝ, ℝ), GreenODE κ q γ then Classical.choose h else 0
-
-
-def hkRHS (κ : ℝ) (q : 𝓢(ℝ, ℝ)) (x : ℝ) : ℝ :=
-  16 * κ ^ 5 * deriv (greenOffset κ q : ℝ → ℝ) x + 4 * κ ^ 2 * deriv (q : ℝ → ℝ) x
-
-
-def IsHkSolution (κ : ℝ) (c : ℝ → 𝓢(ℝ, ℝ)) : Prop :=
-  ∀ t : ℝ, ∃ v : 𝓢(ℝ, ℝ), HasDerivAt c v t ∧ ∀ x : ℝ, v x = hkRHS κ (c t) x
-
-
-def hkFlow (κ t : ℝ) (q : 𝓢(ℝ, ℝ)) : 𝓢(ℝ, ℝ) :=
-  if h : ∃ c : ℝ → 𝓢(ℝ, ℝ), IsHkSolution κ c ∧ c 0 = q then Classical.choose h t else q
-def riccatiK (κ : ℝ) (f : ℝ → ℝ) (x : ℝ) : ℝ :=
-  -∫ y in Set.Ici x, Real.exp (2 * κ * (x - y)) * f y
-
-
-
-def IsRiccatiSol (κ : ℝ) (q : ℝ → ℝ) (w : ℝ → ℝ) : Prop :=
-  MemLp w 2 (volume : Measure ℝ) ∧ (∫ x : ℝ, w x ^ 2) ≤ 1 / 16 ∧
-    ∀ x : ℝ, w x = riccatiK κ q x - riccatiK κ (fun y => w y ^ 2) x
-
-
-def riccatiAlpha (κ : ℝ) (q : ℝ → ℝ) : ℝ :=
-  if h : ∃ w : ℝ → ℝ, IsRiccatiSol κ q w then ∫ x : ℝ, (Classical.choose h) x ^ 2 else 0
-def LinGreenODE (κ : ℝ) (q f e : 𝓢(ℝ, ℝ)) : Prop :=
-  ∀ x : ℝ, iteratedDeriv 3 (e : ℝ → ℝ) x - 2 * deriv (fun y => q y * e y) x
-      - 2 * q x * deriv (e : ℝ → ℝ) x - 4 * κ ^ 2 * deriv (e : ℝ → ℝ) x =
-    2 * deriv (fun y => f y * (1 / (2 * κ) + greenOffset κ q y)) x
-      + 2 * f x * deriv (greenOffset κ q : ℝ → ℝ) x
-def rgreen (κ : ℝ) (w : ℝ → ℝ) (x : ℝ) : ℝ :=
-  ∫ s in Set.Ioi (0 : ℝ), Real.exp (-2 * κ * s + 2 * ∫ y in (x - s)..x, w y)
-
-
-def rgreenR (κ : ℝ) (w : ℝ → ℝ) (x : ℝ) : ℝ :=
-  ∫ s in Set.Ioi (0 : ℝ), Real.exp (-2 * κ * s + 2 * ∫ y in x..(x + s), w y)
-
-
-def wfield (κ : ℝ) (w : ℝ → ℝ) (x : ℝ) : ℝ :=
-  8 * κ ^ 5 * (rgreen κ w x - rgreenR κ w x)
-def wclamp (b a : ℝ) : ℝ := max (-b) (min a b)
-
-
-def rgreenC (κ ρ : ℝ) (w : ℝ → ℝ) (x : ℝ) : ℝ :=
-  ∫ s in Set.Ioi (0 : ℝ),
-    Real.exp (-2 * κ * s + 2 * wclamp (ρ * Real.sqrt s) (∫ y in (x - s)..x, w y))
-
-
-def rgreenRC (κ ρ : ℝ) (w : ℝ → ℝ) (x : ℝ) : ℝ :=
-  ∫ s in Set.Ioi (0 : ℝ),
-    Real.exp (-2 * κ * s + 2 * wclamp (ρ * Real.sqrt s) (∫ y in x..(x + s), w y))
-
-
-def wfieldC (κ ρ : ℝ) (w : ℝ → ℝ) (x : ℝ) : ℝ :=
-  8 * κ ^ 5 * (rgreenC κ ρ w x - rgreenRC κ ρ w x)
-def TimeGood (φ : ℝ → ℝ → ℝ) : Prop :=
-  ∀ (T : ℝ) (k : ℕ), ∃ C : ℝ, ∀ s t : ℝ, |s| ≤ T → |t| ≤ T → ∀ x : ℝ,
-    (1 + x ^ 2) ^ k * |φ t x| ≤ C ∧ (1 + x ^ 2) ^ k * |φ s x - φ t x| ≤ C * |s - t|
-
-
-def RegN (n : ℕ) (φ : ℝ → ℝ → ℝ) : Prop :=
-  (∀ t : ℝ, ContDiff ℝ n (φ t)) ∧
-    ∀ j : ℕ, j ≤ n → TimeGood (fun t x => iteratedDeriv j (φ t) x)
-
+Imported from `KdVLine` (see the module docstring). Nothing to declare here. -/
 
 /-! # Part II. The circle `ℝ/ℤ`
 
