@@ -38,5 +38,5 @@
     "proof": "answer.lean",
     "informal": "informal.md"
   },
-  "dag_lemmas": 19
+  "dag_lemmas": 17
 }
