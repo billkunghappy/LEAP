@@ -50,7 +50,11 @@ async function loadProblems() {
 const hasInformal = p => !!p.files.informal;
 const hasLean = p => !!(p.files.proof || p.files.statement);
 const hasDag = p => !!p.files.dag;
-const fileUrl = (p, k) => p.base + p.files[k];
+// A file entry is a path, or for multi-part problems a list of {label, path} (one per part); PART picks the part shown.
+let PART = 0;
+const partsOf = p => ["statement", "proof", "dag"].map(k => p.files[k]).find(Array.isArray) || null;
+const fileOf = (p, k) => { const f = p.files[k]; return Array.isArray(f) ? (f[PART] || f[0]).path : f; };
+const fileUrl = (p, k) => p.base + fileOf(p, k);
 const textCache = new Map();
 async function getText(p, k) {
   const u = fileUrl(p, k);
@@ -101,11 +105,12 @@ function sampleCfg(p) {
   return { seed: h, size, vocab, root: (p.lean && p.lean.root) || p.id.replace(/-/g, "_") };
 }
 async function getDag(p) {
-  if (dagCache.has(p.id)) return dagCache.get(p.id);
+  const key = p.id + "#" + PART;
+  if (dagCache.has(key)) return dagCache.get(key);
   let raw = null, sample = true;
   if (hasDag(p)) { try { const j = JSON.parse(await getText(p, "dag")); raw = Array.isArray(j.nodes) ? j : fromLeapGraph(j); sample = false; } catch (e) { console.error(e); raw = null; } }
   if (!raw) raw = genDag(sampleCfg(p));
-  const d = buildDag(raw); d.sample = sample; dagCache.set(p.id, d); return d;
+  const d = buildDag(raw); d.sample = sample; dagCache.set(key, d); return d;
 }
 /* ---------- sample DAG generator (placeholder until real exports exist) ---------- */
 function rng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
