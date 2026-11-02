@@ -1,5 +1,6 @@
 {
   "order": [
+    "navier-stokes",
     "hilbert-10",
     "kdv-h-1",
     "agirseven-ollis",
@@ -12,7 +13,6 @@
     "erdos-1095",
     "erdos-1101",
     "jamison-caterpillar",
-    "navier-stokes",
     "positive-mass"
   ]
 }
