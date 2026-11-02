@@ -1,4 +1,4 @@
-/* Solved problems page: the full, filterable list. Each row opens the problem page. */
+/* Problems page: the full, filterable list. Each row opens the problem page. */
 const T = { filter: "all", q: "" };
 function renderChips() {
   const cols = [...new Set(PROBLEMS.map(p => p.collection))];

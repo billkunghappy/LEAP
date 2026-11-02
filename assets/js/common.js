@@ -211,7 +211,7 @@ function drawerEl() {
     <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
       <header class="drawer-bar">
         <button type="button" class="drawer-x" data-close aria-label="Close">×</button>
-        <div class="drawer-t"><span class="kicker">Solved problem</span><span id="drawerTitle"></span></div>
+        <div class="drawer-t"><span class="kicker">Problem</span><span id="drawerTitle"></span></div>
         <a class="btn" id="drawerFull" href="#" target="_blank" rel="noopener">Open as page ↗</a>
       </header>
       <iframe class="drawer-frame" title="Problem"></iframe>

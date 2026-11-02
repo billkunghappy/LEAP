@@ -78,7 +78,7 @@ function renderHeadline() {
   const maxLoc = Math.max(0, ...PROBLEMS.map(p => p.loc || 0));
   const maxDag = Math.max(0, ...PROBLEMS.map(p => p.dag_lemmas || 0));
   const num = (v, unit) => `<span class="hn">${v}</span> ${unit}`;
-  const parts = [num(PROBLEMS.length, "open problems solved")];
+  const parts = [num(PROBLEMS.length, "frontier problems formally proved")];
   if (maxLoc) parts.push(num(maxLoc >= 20000 ? kloc(maxLoc) : fmt(maxLoc), "lines in the longest proof"));
   if (maxDag) parts.push(num(fmt(maxDag), "lemmas in the largest proof DAG"));
   $("#headline").innerHTML = parts.map(x => `<span class="hp">${x}</span>`).join("");
