@@ -32,13 +32,14 @@ async function renderLean(p) {
   try {
     const stmt = p.files.statement ? await getText(p, "statement") : null;
     const proof = p.files.proof ? await getText(p, "proof") : null; if (CUR !== p) return;
+    renderPartNote(p, (stmt || "") + "\n" + (proof || ""));
     const lines = proof ? proof.split("\n") : [];
     proofIndex = new Map();
     lines.forEach((l, i) => { const m = l.match(/^(?:private\s+|protected\s+)?(?:theorem|lemma)\s+([^\s(:{\[]+)/); if (m && !proofIndex.has(m[1])) proofIndex.set(m[1], i); });
     const opts = [...proofIndex.keys()].map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
     box.innerHTML = (stmt ? `<h4 class="lh">The statement</h4><pre class="lean">${hl(stmt, false)}</pre>` : "") +
       (proof ? `<h4 class="lh">The verified proof <span>${fmt(lines.length)} lines · ${proofIndex.size} theorems · no sorry</span></h4>
-        <div class="proof-bar"><label class="mono" for="jump">Jump to</label><select id="jump"><option value="">a theorem…</option>${opts}</select><span class="sp"></span><a class="btn" href="${esc(fileUrl(p, "proof"))}" download>Download ${esc(p.files.proof)}</a></div>
+        <div class="proof-bar"><label class="mono" for="jump">Jump to</label><select id="jump"><option value="">a theorem…</option>${opts}</select><span class="sp"></span><a class="btn" href="${esc(fileUrl(p, "proof"))}" download>Download ${esc(fileOf(p, "proof").split("/").pop())}</a></div>
         <div class="code-view" id="proofView"></div>` : "");
     if (proof) {
       const view = $("#proofView");
@@ -496,6 +497,20 @@ function renderLegend() {
 }
 
 
+/* ---------- parts: a problem may ship several Lean developments, a later one importing an earlier one ---------- */
+const modOf = f => f && f.path.split("/").pop().replace(/\.lean$/, "");
+function renderParts(p) {
+  const parts = partsOf(p), box = $("#parts"); box.hidden = !parts; if (!parts) return;
+  box.innerHTML = `<span class="mono">Part</span><div class="vtabs" role="tablist" aria-label="Part">${parts.map((f, i) => `<button class="vtab" type="button" role="tab" data-part="${i}" aria-selected="${i === PART}">${esc(f.label)}</button>`).join("")}</div><span id="partNote"></span>`;
+}
+// Name the parts whose proof module the current part imports, e.g. `import KdVLine` -> the Line part.
+function renderPartNote(p, src) {
+  const proofs = Array.isArray(p.files.proof) ? p.files.proof : null, el = $("#partNote"); if (!proofs || !el) return;
+  const deps = proofs.map((f, i) => i !== PART && new RegExp(`^import\\s+${modOf(f)}\\s*$`, "m").test(src) ? i : -1).filter(i => i >= 0);
+  el.innerHTML = deps.length ? `${esc(proofs[PART].label)} builds on ${deps.map(i => `<a href="#" data-part="${i}">${esc(proofs[i].label)}</a> (<code>import ${esc(modOf(proofs[i]))}</code>)`).join(", ")}` : "";
+}
+$("#parts").addEventListener("click", e => { const b = e.target.closest("[data-part]"); if (!b) return; e.preventDefault(); if (+b.dataset.part !== PART) { PART = +b.dataset.part; renderProblemPage(CUR); } });
+
 /* ---------- page ---------- */
 let CUR = null;
 function renderProblemPage(p) {
@@ -522,7 +537,7 @@ function renderProblemPage(p) {
     ${(p.links || []).map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}
     ${p.files.proof ? `<a class="btn" href="${esc(fileUrl(p, "proof"))}" download>Download the Lean proof</a>` : ""}
     ${p.files.statement ? `<a class="btn" href="${esc(fileUrl(p, "statement"))}" target="_blank" rel="noopener">Lean statement ↗</a>` : ""}`;
-  renderInformal(p); renderLean(p);
+  renderParts(p); renderInformal(p); renderLean(p);
   $("#xstats").textContent = "Loading proof DAG…";
   getDag(p).then(d => { if (CUR === p) loadDag(d); });
 }
