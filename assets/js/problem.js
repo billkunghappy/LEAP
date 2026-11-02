@@ -20,6 +20,9 @@ async function renderInformal(p) {
   try {
     const src = await getText(p, "informal"); if (CUR !== p) return;
     box.innerHTML = `<div class="doc-head"><span class="mono">${esc(p.files.informal)}</span><span>${fmt(src.split("\n").length)} lines</span><a href="${esc(fileUrl(p, "informal"))}" target="_blank" rel="noopener">Open the Markdown ↗</a></div><article class="prose">${renderMarkdown(src)}</article>`;
+    // Image paths in the Markdown are relative to the Markdown file, not to this page.
+    const dir = fileUrl(p, "informal").replace(/[^/]*$/, "");
+    box.querySelectorAll(".prose img[src]").forEach(img => { const s = img.getAttribute("src"); if (!/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(s)) img.setAttribute("src", dir + s); });
     if (window.renderMathInElement) renderMathInElement(box.querySelector(".prose"), { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "\\[", right: "\\]", display: true }, { left: "$", right: "$", display: false }], throwOnError: false });
   } catch (e) { box.innerHTML = `<div class="err">Could not load ${esc(fileUrl(p, "informal"))}.</div>`; }
 }
