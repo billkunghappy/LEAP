@@ -499,8 +499,10 @@ function renderLegend() {
 
 /* ---------- parts: a problem may ship several Lean developments, a later one importing an earlier one ---------- */
 const modOf = f => f && f.path.split("/").pop().replace(/\.lean$/, "");
+// Older cached copies of problem.html have no #parts box; add one rather than fail.
+const partsBox = () => $("#parts") || (() => { const d = document.createElement("div"); d.className = "parts"; d.id = "parts"; d.hidden = true; d.addEventListener("click", onPartClick); $("#sol .wrap").prepend(d); return d; })();
 function renderParts(p) {
-  const parts = partsOf(p), box = $("#parts"); box.hidden = !parts; if (!parts) return;
+  const parts = partsOf(p), box = partsBox(); box.hidden = !parts; if (!parts) return;
   box.innerHTML = `<span class="mono">Part</span><div class="vtabs" role="tablist" aria-label="Part">${parts.map((f, i) => `<button class="vtab" type="button" role="tab" data-part="${i}" aria-selected="${i === PART}">${esc(f.label)}</button>`).join("")}</div><span id="partNote"></span>`;
 }
 // Name the parts whose proof module the current part imports, e.g. `import KdVLine` -> the Line part.
@@ -509,7 +511,8 @@ function renderPartNote(p, src) {
   const deps = proofs.map((f, i) => i !== PART && new RegExp(`^import\\s+${modOf(f)}\\s*$`, "m").test(src) ? i : -1).filter(i => i >= 0);
   el.innerHTML = deps.length ? `${esc(proofs[PART].label)} builds on ${deps.map(i => `<a href="#" data-part="${i}">${esc(proofs[i].label)}</a> (<code>import ${esc(modOf(proofs[i]))}</code>)`).join(", ")}` : "";
 }
-$("#parts").addEventListener("click", e => { const b = e.target.closest("[data-part]"); if (!b) return; e.preventDefault(); if (+b.dataset.part !== PART) { PART = +b.dataset.part; renderProblemPage(CUR); } });
+function onPartClick(e) { const b = e.target.closest("[data-part]"); if (!b) return; e.preventDefault(); if (+b.dataset.part !== PART) { PART = +b.dataset.part; renderProblemPage(CUR); } }
+if ($("#parts")) $("#parts").addEventListener("click", onPartClick);
 
 /* ---------- page ---------- */
 let CUR = null;
