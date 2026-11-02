@@ -521,7 +521,7 @@ function renderProblemPage(p) {
   document.title = `${p.title} · LEAP`;
   if (EMBED && parent !== window) try { parent.postMessage({ type: "leap:problem", id: p.id }, location.origin); } catch (e) {}
   const i = PROBLEMS.indexOf(p), prev = PROBLEMS[(i - 1 + PROBLEMS.length) % PROBLEMS.length], next = PROBLEMS[(i + 1) % PROBLEMS.length];
-  $("#crumb").innerHTML = `<a href="problems.html">Solved problems</a><span>›</span><span>${esc(p.title)}</span>`;
+  $("#crumb").innerHTML = `<a href="problems.html">Problems</a><span>›</span><span>${esc(p.title)}</span>`;
   const link = q => problemUrl(q) + (EMBED ? "&embed=1" : "");
   $("#pager").innerHTML = `<a class="btn" href="${link(prev)}" title="${esc(prev.title)}">← Previous</a><a class="btn" href="${link(next)}" title="${esc(next.title)}">Next →</a>`;
   $("#dTitle").innerHTML = titleHTML(p);
@@ -552,7 +552,7 @@ boot(() => {
   const p = PROBLEMS.find(x => x.id === id);
   if (!p) {
     $("#dTitle").textContent = "Problem not found";
-    $("#dSub").innerHTML = `There is no problem with id <code>${esc(id || "")}</code>. <a href="problems.html">See all solved problems</a>.`;
+    $("#dSub").innerHTML = `There is no problem with id <code>${esc(id || "")}</code>. <a href="problems.html">See all problems</a>.`;
     $("#sol").hidden = true; return;
   }
   setView("dag");
