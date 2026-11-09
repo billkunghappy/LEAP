@@ -104,11 +104,21 @@ function sampleCfg(p) {
   const vocab = /combinator/i.test(a) ? "comb" : /number|totient/i.test(a) ? "nt" : /PDE|analysis/i.test(a) ? "pde" : "generic";
   return { seed: h, size, vocab, root: (p.lean && p.lean.root) || p.id.replace(/-/g, "_") };
 }
+// Large graphs are stored gzip-compressed (proof_graph.json.gz). Check the gzip magic bytes rather than the
+// extension, since a server may already have decompressed the response.
+async function getDagText(p) {
+  if (!/\.gz$/i.test(p.files.dag)) return getText(p, "dag");
+  const u = fileUrl(p, "dag"), r = await fetch(u);
+  if (!r.ok) throw new Error(u);
+  const buf = new Uint8Array(await r.arrayBuffer());
+  if (buf[0] !== 0x1f || buf[1] !== 0x8b) return new TextDecoder().decode(buf);
+  return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+}
 async function getDag(p) {
   const key = p.id + "#" + PART;
   if (dagCache.has(key)) return dagCache.get(key);
   let raw = null, sample = true;
-  if (hasDag(p)) { try { const j = JSON.parse(await getText(p, "dag")); raw = Array.isArray(j.nodes) ? j : fromLeapGraph(j); sample = false; } catch (e) { console.error(e); raw = null; } }
+  if (hasDag(p)) { try { const j = JSON.parse(await getDagText(p)); raw = Array.isArray(j.nodes) ? j : fromLeapGraph(j); sample = false; } catch (e) { console.error(e); raw = null; } }
   if (!raw) raw = genDag(sampleCfg(p));
   const d = buildDag(raw); d.sample = sample; dagCache.set(key, d); return d;
 }

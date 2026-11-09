@@ -1,6 +1,5 @@
 {
   "order": [
-    "navier-stokes",
     "hilbert-10",
     "kdv-h-1",
     "agirseven-ollis",
@@ -13,6 +12,8 @@
     "erdos-1095",
     "erdos-1101",
     "jamison-caterpillar",
-    "positive-mass"
+    "navier-stokes",
+    "positive-mass",
+    "weil-conjecture"
   ]
 }
