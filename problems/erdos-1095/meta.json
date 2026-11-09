@@ -6,7 +6,7 @@
   "marks": "*",
   "featured": false,
   "area": null,
-  "loc": null,
+  "loc": 2939,
   "credit": null,
   "added": "2026-10",
   "summary": "g(n) ≤ exp((1 + o(1)) k).",
@@ -28,9 +28,15 @@
   ],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "erdos_1095.variants.upper_conjecture"
   },
   "id": "erdos-1095",
   "title": "Erdős Problem #1095",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 18
 }

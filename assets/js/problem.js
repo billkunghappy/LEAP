@@ -20,6 +20,9 @@ async function renderInformal(p) {
   try {
     const src = await getText(p, "informal"); if (CUR !== p) return;
     box.innerHTML = `<div class="doc-head"><span class="mono">${esc(p.files.informal)}</span><span>${fmt(src.split("\n").length)} lines</span><a href="${esc(fileUrl(p, "informal"))}" target="_blank" rel="noopener">Open the Markdown ↗</a></div><article class="prose">${renderMarkdown(src)}</article>`;
+    // Image paths in the Markdown are relative to the Markdown file, not to this page.
+    const dir = fileUrl(p, "informal").replace(/[^/]*$/, "");
+    box.querySelectorAll(".prose img[src]").forEach(img => { const s = img.getAttribute("src"); if (!/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(s)) img.setAttribute("src", dir + s); });
     if (window.renderMathInElement) renderMathInElement(box.querySelector(".prose"), { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "\\[", right: "\\]", display: true }, { left: "$", right: "$", display: false }], throwOnError: false });
   } catch (e) { box.innerHTML = `<div class="err">Could not load ${esc(fileUrl(p, "informal"))}.</div>`; }
 }
@@ -32,13 +35,14 @@ async function renderLean(p) {
   try {
     const stmt = p.files.statement ? await getText(p, "statement") : null;
     const proof = p.files.proof ? await getText(p, "proof") : null; if (CUR !== p) return;
+    renderPartNote(p, (stmt || "") + "\n" + (proof || ""));
     const lines = proof ? proof.split("\n") : [];
     proofIndex = new Map();
     lines.forEach((l, i) => { const m = l.match(/^(?:private\s+|protected\s+)?(?:theorem|lemma)\s+([^\s(:{\[]+)/); if (m && !proofIndex.has(m[1])) proofIndex.set(m[1], i); });
     const opts = [...proofIndex.keys()].map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
     box.innerHTML = (stmt ? `<h4 class="lh">The statement</h4><pre class="lean">${hl(stmt, false)}</pre>` : "") +
       (proof ? `<h4 class="lh">The verified proof <span>${fmt(lines.length)} lines · ${proofIndex.size} theorems · no sorry</span></h4>
-        <div class="proof-bar"><label class="mono" for="jump">Jump to</label><select id="jump"><option value="">a theorem…</option>${opts}</select><span class="sp"></span><a class="btn" href="${esc(fileUrl(p, "proof"))}" download>Download ${esc(p.files.proof)}</a></div>
+        <div class="proof-bar"><label class="mono" for="jump">Jump to</label><select id="jump"><option value="">a theorem…</option>${opts}</select><span class="sp"></span><a class="btn" href="${esc(fileUrl(p, "proof"))}" download>Download ${esc(fileOf(p, "proof").split("/").pop())}</a></div>
         <div class="code-view" id="proofView"></div>` : "");
     if (proof) {
       const view = $("#proofView");
@@ -496,6 +500,23 @@ function renderLegend() {
 }
 
 
+/* ---------- parts: a problem may ship several Lean developments, a later one importing an earlier one ---------- */
+const modOf = f => f && f.path.split("/").pop().replace(/\.lean$/, "");
+// Older cached copies of problem.html have no #parts box; add one rather than fail.
+const partsBox = () => $("#parts") || (() => { const d = document.createElement("div"); d.className = "parts"; d.id = "parts"; d.hidden = true; d.addEventListener("click", onPartClick); $("#sol .wrap").prepend(d); return d; })();
+function renderParts(p) {
+  const parts = partsOf(p), box = partsBox(); box.hidden = !parts; if (!parts) return;
+  box.innerHTML = `<span class="mono">Part</span><div class="vtabs" role="tablist" aria-label="Part">${parts.map((f, i) => `<button class="vtab" type="button" role="tab" data-part="${i}" aria-selected="${i === PART}">${esc(f.label)}</button>`).join("")}</div><span id="partNote"></span>`;
+}
+// Name the parts whose proof module the current part imports, e.g. `import KdVLine` -> the Line part.
+function renderPartNote(p, src) {
+  const proofs = Array.isArray(p.files.proof) ? p.files.proof : null, el = $("#partNote"); if (!proofs || !el) return;
+  const deps = proofs.map((f, i) => i !== PART && new RegExp(`^import\\s+${modOf(f)}\\s*$`, "m").test(src) ? i : -1).filter(i => i >= 0);
+  el.innerHTML = deps.length ? `${esc(proofs[PART].label)} builds on ${deps.map(i => `<a href="#" data-part="${i}">${esc(proofs[i].label)}</a> (<code>import ${esc(modOf(proofs[i]))}</code>)`).join(", ")}` : "";
+}
+function onPartClick(e) { const b = e.target.closest("[data-part]"); if (!b) return; e.preventDefault(); if (+b.dataset.part !== PART) { PART = +b.dataset.part; renderProblemPage(CUR); } }
+if ($("#parts")) $("#parts").addEventListener("click", onPartClick);
+
 /* ---------- page ---------- */
 let CUR = null;
 function renderProblemPage(p) {
@@ -503,7 +524,7 @@ function renderProblemPage(p) {
   document.title = `${p.title} · LEAP`;
   if (EMBED && parent !== window) try { parent.postMessage({ type: "leap:problem", id: p.id }, location.origin); } catch (e) {}
   const i = PROBLEMS.indexOf(p), prev = PROBLEMS[(i - 1 + PROBLEMS.length) % PROBLEMS.length], next = PROBLEMS[(i + 1) % PROBLEMS.length];
-  $("#crumb").innerHTML = `<a href="problems.html">Solved problems</a><span>›</span><span>${esc(p.title)}</span>`;
+  $("#crumb").innerHTML = `<a href="problems.html">Problems</a><span>›</span><span>${esc(p.title)}</span>`;
   const link = q => problemUrl(q) + (EMBED ? "&embed=1" : "");
   $("#pager").innerHTML = `<a class="btn" href="${link(prev)}" title="${esc(prev.title)}">← Previous</a><a class="btn" href="${link(next)}" title="${esc(next.title)}">Next →</a>`;
   $("#dTitle").innerHTML = titleHTML(p);
@@ -522,7 +543,7 @@ function renderProblemPage(p) {
     ${(p.links || []).map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}
     ${p.files.proof ? `<a class="btn" href="${esc(fileUrl(p, "proof"))}" download>Download the Lean proof</a>` : ""}
     ${p.files.statement ? `<a class="btn" href="${esc(fileUrl(p, "statement"))}" target="_blank" rel="noopener">Lean statement ↗</a>` : ""}`;
-  renderInformal(p); renderLean(p);
+  renderParts(p); renderInformal(p); renderLean(p);
   $("#xstats").textContent = "Loading proof DAG…";
   getDag(p).then(d => { if (CUR === p) loadDag(d); });
 }
@@ -534,7 +555,7 @@ boot(() => {
   const p = PROBLEMS.find(x => x.id === id);
   if (!p) {
     $("#dTitle").textContent = "Problem not found";
-    $("#dSub").innerHTML = `There is no problem with id <code>${esc(id || "")}</code>. <a href="problems.html">See all solved problems</a>.`;
+    $("#dSub").innerHTML = `There is no problem with id <code>${esc(id || "")}</code>. <a href="problems.html">See all problems</a>.`;
     $("#sol").hidden = true; return;
   }
   setView("dag");

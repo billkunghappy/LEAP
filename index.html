@@ -8,14 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=20261102.3">
 </head>
 <body>
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">LEAP</a>
     <nav aria-label="Site">
-      <a href="problems.html">Solved problems</a>
+      <a href="problems.html">Problems</a>
       <a href="index.html#how">How it works</a>
       <a class="opt" href="index.html#run">Run it</a>
       <a class="opt" href="index.html#cite">Cite</a>
@@ -36,25 +36,24 @@
     <li><span class="vk">Built to assist</span>Start from your own informal proof or blueprint and let LEAP do the formal work.</li>
   </ul>
   <div class="btns">
-    <a class="btn primary" href="#problems">See the solved problems</a>
+    <a class="btn primary" href="#problems">See the problems</a>
     <a class="btn" href="https://arxiv.org/abs/2606.03303" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9 1.5V5h4"/></svg>Paper</a>
     <!-- TODO: restore once the LEAP framework repo is public
     <a class="btn" href="https://github.com/billkunghappy/LEAP-CLI" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>LEAP</a>
     -->
     <a class="btn" href="https://github.com/billkunghappy/LEAP-CLI" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="m4.5 6 2 2-2 2M8.5 10.5h3"/></svg>LEAP-CLI</a>
   </div>
-  <!-- TODO: real mathematician contributors, and the real person-to-affiliation mapping (superscripts are placeholders) -->
   <div class="people">
-    <div class="prow2"><span class="plabel">Mathematicians</span><p><span class="pn">Mathematician One<sup>3</sup></span>, <span class="pn">Mathematician Two<sup>3</sup></span>, <span class="pn">Mathematician Three<sup>3</sup></span>, <span class="pn">Mathematician Four<sup>3</sup></span> <span class="todo">TODO</span></p></div>
-    <div class="prow2"><span class="plabel">LEAP team</span><p><span class="pn">Po-Nien Kung<sup>1</sup></span>, <span class="pn">Linfeng Song<sup>1</sup></span>, <span class="pn">Dawsen Hwang<sup>1</sup></span>, <span class="pn">Jinsung Yoon<sup>1</sup></span>, <span class="pn">Chun-Liang Li<sup>1</sup></span>, <span class="pn">Simone Severini<sup>1</sup></span>, <span class="pn">Mirek Olšák<sup>1</sup></span>, <span class="pn">Edward Lockhart<sup>1</sup></span>, <span class="pn">Quoc V Le<sup>1</sup></span>, <span class="pn">Burak Gokturk<sup>1</sup></span>, <span class="pn">Thang Luong<sup>1</sup></span>, <span class="pn">Tomas Pfister<sup>1</sup></span>, <span class="pn">Nanyun Peng<sup>1</sup></span></p></div>
-    <ol class="affils"><li><sup>1</sup><img src="assets/logos/google.svg" alt="">Google Cloud AI Research</li><li><sup>2</sup><img src="assets/logos/deepmind.svg" alt="" onerror="this.remove()">Google DeepMind</li><li><sup>3</sup><img src="assets/logos/google.svg" alt="">Google</li><li class="todo-li"><span class="todo">TODO</span>Person-to-affiliation mapping is a placeholder</li></ol>
+    <div class="prow2"><span class="plabel">Mathematicians</span><p><span class="pn">Hyunsik Chae<sup>3</sup></span>, <span class="pn">Xinjie He<sup>3</sup></span>, <span class="pn">Raghu Meka<sup>3</sup></span>, <span class="pn">Amit Sahai<sup>3</sup></span>, <span class="pn">Zhi Zhang<sup>3</sup></span>, <span class="pn">Vigyan Sahai<sup>3</sup></span>, <span class="pn">Carlo Pagano<sup>2</sup></span>, <span class="pn">Moritz Firsching<sup>2</sup></span></p></div>
+    <div class="prow2"><span class="plabel">LEAP team</span><p><span class="pn">Po-Nien Kung<sup>1,3</sup></span>, <span class="pn">Linfeng Song<sup>1</sup></span>, <span class="pn">Zheng Tan<sup>1,3</sup></span>, <span class="pn">Dawsen Hwang<sup>2</sup></span>, <span class="pn">Jinsung Yoon<sup>1</sup></span>, <span class="pn">Chun-Liang Li<sup>1</sup></span>, <span class="pn">Simone Severini<sup>1</sup></span>, <span class="pn">Song Zuo<sup>1</sup></span>, <span class="pn">Yuan Deng<sup>1</sup></span>, <span class="pn">Jieming Mao<sup>1</sup></span>, <span class="pn">Jin Zhou<sup>2</sup></span>, <span class="pn">Qijun Tan<sup>2</sup></span>, <span class="pn">Mirek Olšák<sup>2</sup></span>, <span class="pn">Edward Lockhart<sup>2</sup></span>, <span class="pn">Quoc V Le<sup>2</sup></span>, <span class="pn">Burak Gokturk<sup>1</sup></span>, <span class="pn">Thang Luong<sup>2</sup></span>, <span class="pn">Tomas Pfister<sup>1</sup></span>, <span class="pn">Vahab Mirrokni<sup>1</sup></span>, <span class="pn">Nanyun Peng<sup>1</sup></span></p></div>
+    <ol class="affils"><li><sup>1</sup><img src="assets/logos/google.svg" alt="">Google</li><li><sup>2</sup><img src="assets/logos/deepmind.svg" alt="" onerror="this.remove()">Google DeepMind</li><li><sup>3</sup><img src="assets/logos/ucla.svg" alt="">UCLA</li></ol>
   </div></div>
 
 <section class="sec" id="problems"><div class="wrap">
   <div class="sec-head">
-    <div><div class="kicker">01 · Solved problems</div>
+    <div><div class="kicker">01 · Problems</div>
     <h2>Featured results</h2></div>
-    <a class="btn" href="problems.html">All solved problems →</a>
+    <a class="btn" href="problems.html">All problems →</a>
   </div>
   <div id="loadErr" hidden></div>
   <div class="car" id="car">
@@ -193,7 +192,7 @@ leap-run-agent --file Problem.lean</pre><button type="button" class="copy" aria-
 </main>
 <footer><div class="wrap">LEAP · Lean Environment Agentic Prover. Proof DAGs and Lean code marked “sample” are placeholders until the real exports are added.</div></footer>
 <div class="pop" id="pop" hidden></div>
-<script src="assets/js/common.js"></script>
-<script src="assets/js/home.js"></script>
+<script src="assets/js/common.js?v=20261102.3"></script>
+<script src="assets/js/home.js?v=20261102.3"></script>
 </body>
 </html>

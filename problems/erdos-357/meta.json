@@ -6,7 +6,7 @@
   "marks": "*",
   "featured": false,
   "area": "Additive combinatorics",
-  "loc": null,
+  "loc": 2928,
   "credit": null,
   "added": "2026-10",
   "summary": "How long can a sequence in [1, n] be if all its sums of consecutive terms are distinct?",
@@ -23,9 +23,15 @@
   ],
   "lean": {
     "repo": "https://github.com/billkunghappy/LEAP-CLI",
-    "root": null
+    "root": "erdos_357.variants.hegyvari"
   },
   "id": "erdos-357",
   "title": "Erdős Problem #357",
-  "files": {}
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json",
+    "proof": "answer.lean",
+    "informal": "informal.md"
+  },
+  "dag_lemmas": 17
 }
