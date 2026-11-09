@@ -1,0 +1,31 @@
+{
+  "subtitle": "the Riemann hypothesis for varieties over finite fields",
+  "collection": "Classic problems",
+  "number": null,
+  "variant": null,
+  "marks": "",
+  "featured": true,
+  "area": "Algebraic geometry · Number theory",
+  "loc": 1812300,
+  "credit": "Teamwork-LEAP",
+  "added": "2026-11",
+  "summary": "The point counts of a smooth proper variety over a finite field are governed by finitely many algebraic integers of prescribed size. Weil conjectured this in 1949, and Deligne completed the proof in 1974 by bringing together ℓ-adic cohomology, Lefschetz pencils and a function-field adaptation of Rankin's squaring trick.",
+  "problem": [
+    "In 1949, André Weil conjectured that the number of points of a smooth projective variety over a finite field is governed by a zeta function that is rational, satisfies a functional equation, and obeys an analogue of the Riemann hypothesis. These conjectures shaped much of 20th-century algebraic geometry. Dwork proved rationality in 1960, Grothendieck and his school developed étale cohomology to interpret the zeta function cohomologically and obtain the functional equation, and Deligne proved the Riemann hypothesis in 1974 (La conjecture de Weil. I, Publ. Math. IHÉS 43), work for which he received the Fields Medal in 1978. Using Teamwork-LEAP, we formalize the Weil conjectures end-to-end, following Deligne's paper."
+  ],
+  "statement": "Let X be a smooth, proper, geometrically irreducible variety of dimension d over a finite field F with q elements. Then there are finite multisets A₀, …, A₂d of complex numbers, with A₀ = {1}, such that each Aᵢ is stable under every automorphism of ℂ, every α ∈ Aᵢ is an algebraic integer with |α| = q^{i/2}, α ↦ q^d/α maps Aᵢ onto A₂d₋ᵢ, and for every finite extension E/F of degree n, #X(E) = ∑ᵢ (−1)ⁱ ∑_{α ∈ Aᵢ} αⁿ.",
+  "notes": [],
+  "links": [],
+  "lean": {
+    "repo": "https://github.com/billkunghappy/LEAP-CLI",
+    "root": null
+  },
+  "id": "weil-conjecture",
+  "title": "The Weil conjectures",
+  "files": {
+    "statement": "problem.lean",
+    "dag": "proof_graph.json.gz",
+    "proof": "answer/weil_conjecture_main.lean",
+    "informal": "informal.md"
+  }
+}
