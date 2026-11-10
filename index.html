@@ -131,37 +131,37 @@
   <div class="pillars">
     <div class="pillar"><div class="k">Trackable</div><h4>A DAG with backtracking</h4><p>Every goal, attempt and dead end stays in the proof DAG, so a failed branch can be retried and any run can be inspected or resumed.</p></div>
     <div class="pillar"><div class="k">Fast</div><h4>Subagents run in parallel</h4><p>The orchestrator claims every lemma that is ready and launches a subagent for each, so a wide proof is worked on everywhere at once.</p></div>
-    <div class="pillar"><div class="k">Local</div><h4>Compiled per lemma</h4><p>Each submission is compiled on its own against a local Lean server, so even very large graphs never wait on a full rebuild.</p></div>
+    <div class="pillar"><div class="k">Local</div><h4>Compiled per lemma</h4><p>Each submission is compiled on its own by Lean on your machine, so even very large graphs never wait on a full rebuild.</p></div>
   </div>
 </div></section>
 
 <section class="sec" id="run"><div class="wrap">
   <div class="kicker">03 · Run it</div>
   <h2>Point LEAP-CLI at a Lean statement and let it work</h2>
-  <p class="intro">You need Python, a model endpoint and a Lean server. Give it a theorem whose proof is <code>sorry</code>, optionally with your own informal proof, and it builds the proof DAG until everything compiles.</p>
+  <p class="intro">LEAP-CLI runs inside the coding agent you already use: Claude Code, Codex or Antigravity. You need Python and one of those, and LEAP installs Lean and Mathlib for you. Give it a theorem whose proof is <code>sorry</code>, optionally with your own informal proof, and it builds the proof DAG until everything compiles.</p>
   <div class="run2">
     <ol class="rsteps">
-      <li><div class="rn">1</div><div class="rb"><h4>Install</h4><p>LEAP-CLI is a Python package. Installing it adds the <code>leap-*</code> commands.</p>
-        <div class="cmd"><pre>pip install git+https://github.com/billkunghappy/LEAP-CLI.git</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
-      <li><div class="rn">2</div><div class="rb"><h4>Start a Lean server</h4><p>Every submission is compiled here before it can enter the graph. Docker builds the server straight from the repository.</p>
-        <div class="cmd"><pre>docker build -t leap-lean https://github.com/billkunghappy/LEAP-CLI.git#main:src/leap/interfaces
-docker run -p 8000:8000 leap-lean</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
-      <li><div class="rn">3</div><div class="rb"><h4>Prove a theorem</h4><p>Check that the model and the Lean server respond, then start a run on your statement.</p>
-        <div class="cmd"><pre>leap-check
-leap-run-agent --file Problem.lean</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
+      <li><div class="rn">1</div><div class="rb"><h4>Install</h4><p>LEAP-CLI is a Python package. Installing it adds the <code>leap</code> command and the tools the agents call.</p>
+        <div class="cmd"><pre>pipx install git+https://github.com/billkunghappy/LEAP-CLI</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
+      <li><div class="rn">2</div><div class="rb"><h4>Set up Lean</h4><p>Every submission is compiled by Lean before it can enter the graph. This installs Lean v4.34.0 and a matching Mathlib once (about 11 GB). To use a <a href="https://github.com/project-numina/kimina-lean-server" target="_blank" rel="noopener">kimina-lean-server</a> instead, run <code>leap lean --kimina URL</code>.</p>
+        <div class="cmd"><pre>leap lean</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
+      <li><div class="rn">3</div><div class="rb"><h4>Prove a theorem</h4><p>Add the agents to a folder, put your statement in <code>problems/</code>, and start the orchestrator. For Codex, run <code>leap init codex</code>, then <code>codex '$leap-prove Prove problems/my_problem.lean'</code>.</p>
+        <div class="cmd"><pre>mkdir my-proofs &amp;&amp; cd my-proofs
+leap init claude
+claude --agent orchestrator-lemma "Prove problems/my_problem.lean"</pre><button type="button" class="copy" aria-label="Copy command">Copy</button></div></div></li>
     </ol>
     <div class="tree">
       <div class="tree-h"><span class="dotr"></span><span class="doty"></span><span class="dotg"></span><span>what a run leaves behind</span></div>
       <ul>
         <li class="d">runs/my_problem/</li>
-        <li><span class="f">problem.lean</span><span class="c">the statement you gave it</span></li>
-        <li><span class="f">reference/</span><span class="c">your informal proof or blueprint, if any</span></li>
+        <li><span class="f">problem.lean</span><span class="c">a copy of the statement you gave it</span></li>
+        <li><span class="f">reference/</span><span class="c">put your informal proof or blueprint here, if you have one</span></li>
         <li><span class="f hl">proof_graph.json</span><span class="c">the proof DAG, and the point a run resumes from</span></li>
         <li><span class="f">nodes/&lt;lemma&gt;/</span><span class="c">context, findings and logs for each lemma</span></li>
         <li><span class="f">orchestrator_log.md</span><span class="c">what was claimed and launched, step by step</span></li>
-        <li><span class="f ok">solution/answer.lean</span><span class="c">the verified proof, written once nothing is left as <code>sorry</code></span></li>
+        <li><span class="f ok">assembled/final_proof.lean</span><span class="c">the verified proof, written once nothing is left as <code>sorry</code></span></li>
       </ul>
-      <p class="tree-f">The problem pages on this site are built from three of these files: <code>problem.lean</code>, <code>proof_graph.json</code> and <code>solution/answer.lean</code>.</p>
+      <p class="tree-f">The problem pages on this site are built from three of these files: <code>problem.lean</code>, <code>proof_graph.json</code> and <code>assembled/final_proof.lean</code>.</p>
     </div>
   </div>
   <div class="tracks">
