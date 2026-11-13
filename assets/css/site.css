@@ -410,7 +410,7 @@ h1.ph{font-size:clamp(28px,4vw,40px);line-height:1.12;font-weight:800;letter-spa
 
 /* people */
 .people{display:grid;gap:10px;max-width:64em;margin-top:6px}
-.prow2{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;align-items:baseline}
+.prow2{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;align-items:baseline}
 @media (max-width:640px){.prow2{grid-template-columns:1fr;gap:2px}}
 .plabel{font:500 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .prow2 p{margin:0;font-size:13.5px;line-height:1.7;color:var(--ink-2)}
